@@ -1,0 +1,51 @@
+.AboutMe {
+  margin: 0;
+  font-family: "Inter";
+}
+.AboutMe__title {
+  margin: 0;
+  margin-left: 70px;
+  margin-right: 70px;
+  padding-bottom: 23px;
+  margin-top: 110px;
+  line-height: 27px;
+  font-size: 22px;
+  font-weight: 400;
+  border-bottom: 1px solid black;
+}
+.AboutMe__content {
+  margin-top: 66px;
+  margin-left: 70px;
+  margin-right: 70px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+.AboutMe__photo {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.AboutMe__name {
+  margin: 0;
+  font-size: 50px;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.AboutMe__age {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 26px;
+}
+.AboutMe__description {
+  font-size: 14px;
+  width: 600px;
+  margin: 0;
+  margin-bottom: 99px;
+}
+.AboutMe__Link {
+  color: black;
+  text-decoration: none;
+}

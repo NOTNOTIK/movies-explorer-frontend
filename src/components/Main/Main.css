@@ -1,0 +1,11 @@
+@import url(./blocks/header/header.css);
+@import url(./blocks/promo/promo.css);
+@import url(./blocks/NavTab/NavTab.css);
+@import url(./blocks/Techs/Techs.css);
+@import url(./blocks/AboutMe/AboutMe.css);
+@import url(./blocks/Portfolio/Portfolio.css);
+@import url(./blocks/Footer/Footer.css);
+.App {
+  margin: 0 auto;
+  max-width: 1280px;
+}

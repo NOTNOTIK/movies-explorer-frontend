@@ -1,0 +1,57 @@
+.header {
+  background-color: white;
+  height: 74px;
+  display: flex;
+  align-items: center;
+  color: black;
+  justify-content: space-between;
+  padding: 0px 70px 0px 70px;
+  font-family: "Inter";
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.header__link {
+  color: black;
+  text-decoration: none;
+}
+.header__link_active {
+  font-weight: 500;
+}
+.header__button {
+  font-family: "Inter";
+  width: 76px;
+  height: 32px;
+  background-color: #2be080;
+  font-weight: 500;
+  border-radius: 3px;
+  border: none;
+}
+.header__account {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+  height: 32px;
+  width: 100px;
+  border-radius: 40px;
+  box-shadow: 0px 7px 34px -9px rgba(0, 0, 0, 0.3);
+}
+.header__account-name {
+  margin: 0;
+  margin-left: 11px;
+  font-family: "Inter";
+  font-size: 13px;
+  font-weight: 600;
+}
+.header__account-image {
+  width: 13px;
+  height: 13px;
+  padding: 8px;
+  margin-right: 3px;
+  background-color: #f9f9f9;
+  border-radius: 40px;
+}

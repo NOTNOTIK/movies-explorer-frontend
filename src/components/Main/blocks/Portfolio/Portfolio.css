@@ -1,0 +1,37 @@
+.Portfolio {
+  margin-top: 100px;
+  font-family: "Inter";
+}
+.Portfolio__title {
+  margin: 0;
+  height: 20px;
+  margin-left: 70px;
+  color: #a0a0a0;
+  font-size: 18px;
+  font-weight: 400;
+}
+.Portfolio__block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 70px;
+  margin-left: 70px;
+}
+.Portfolio__block:nth-child(2) {
+  margin-top: 50px;
+}
+.Portfolio__block:nth-child(3) {
+  border-bottom: 1px solid #e8e8e8;
+  border-top: 1px solid #e8e8e8;
+}
+.Portfolio__performance {
+  margin: 0;
+  height: 50px;
+  margin-bottom: 19px;
+  margin-top: 20px;
+  font-size: 30px;
+  font-weight: 400;
+}
+.Portfolio__arrow {
+  width: 29px;
+}

@@ -1,0 +1,47 @@
+.promo {
+  height: 574px;
+  background-color: #073042;
+  color: white;
+  font-family: "Inter";
+  position: relative;
+  display: flex;
+}
+.promo__logo {
+  position: absolute;
+  right: 70px;
+  margin-top: 75px;
+}
+.promo__info {
+  margin-left: 70px;
+  margin-top: 75px;
+  height: fit-content;
+}
+.promo__title {
+  margin: 0;
+  width: 640px;
+  font-size: 50px;
+  font-weight: normal;
+  margin-bottom: 36px;
+}
+.promo__description {
+  width: 310px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 146px;
+}
+.promo__button {
+  width: 129px;
+  height: 36px;
+  background: none;
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.promo__button p {
+  margin: 0;
+  font-size: 12px;
+}
