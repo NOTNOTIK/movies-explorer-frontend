@@ -26,7 +26,6 @@
 }
 .Portfolio__performance {
   margin: 0;
-  height: 50px;
   margin-bottom: 19px;
   margin-top: 20px;
   font-size: 30px;
@@ -34,4 +33,23 @@
 }
 .Portfolio__arrow {
   width: 29px;
+}
+
+@media (max-width: 767px) {
+  .Portfolio__title {
+    margin-left: 18px;
+    margin-right: 18px;
+    margin-top: 70px;
+    font-size: 18px;
+  }
+  .Portfolio__block {
+    margin-right: 14px;
+    margin-left: 14px;
+  }
+  .Portfolio__performance {
+    font-size: 18px;
+  }
+  .Portfolio__arrow {
+    width: 18px;
+  }
 }

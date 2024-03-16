@@ -1,5 +1,4 @@
 .header {
-  background-color: #073042;
   height: 74px;
   display: flex;
   align-items: center;
@@ -7,12 +6,10 @@
   justify-content: space-between;
   padding: 0px 70px 0px 70px;
   font-family: "Inter";
+  background-color: #073042;
 }
-.header__logo {
-}
-.header__link {
-}
-.header__nav {
+
+.header__nav-main {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -25,4 +22,10 @@
   font-weight: 500;
   border-radius: 3px;
   border: none;
+}
+@media (max-width: 768px) {
+  .header {
+    width: 100%;
+    padding: 0;
+  }
 }

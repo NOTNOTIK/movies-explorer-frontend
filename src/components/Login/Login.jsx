@@ -29,15 +29,16 @@ const Login = () => {
       <img className="Login__img" src={logo} />
       <p className="login__welcome">Рады видеть</p>
       <form onSubmit={handleSubmit} className="login__form">
-        <p className="login__name">Имя</p>
+        <p className="login__name">E-mail</p>
         <input
           required
           id="email"
           name="email"
-          type="text"
+          type="email"
           value={formValue.email}
           onChange={handleChange}
         />
+        <span class="error" id="email-error"></span>
         <p className="login__name">Пароль</p>
         <input
           required
@@ -47,6 +48,7 @@ const Login = () => {
           value={formValue.password}
           onChange={handleChange}
         />
+        <span class="error" id="password-error"></span>
         <div className="login__button-container">
           <button type="submit" className="login__link">
             Войти
@@ -55,7 +57,7 @@ const Login = () => {
         <div className="Login__signup">
           <p>Ещё не зарегистрированы?</p>
           <Link to="/signup" className="Login__register-link">
-            Войти
+            Регистрация
           </Link>
         </div>
       </form>

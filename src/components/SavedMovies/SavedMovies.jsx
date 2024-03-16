@@ -1,10 +1,10 @@
-import "./Movies.css";
+import "./SavedMovies.css";
 import logo from "../../images/logo.svg";
 import account from "../../images/account.png";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-export default function Movies() {
+export default function SavedMovies() {
   const [isToggled, setIsToggled] = useState(false);
 
   const toggleClass = () => {
@@ -105,20 +105,3 @@ export default function Movies() {
     </div>
   );
 }
-/* 
-          <NavLink
-            to="/movies"
-            className={({ isActive }) =>
-              `header-movies__link ${isActive ? "header-movies_active" : ""}`
-            }
-          >
-            Фильмы
-          </NavLink>
-          <NavLink
-            to="/savedMovies"
-            className={({ isActive }) =>
-              `header-movies__link ${isActive ? "header-movies_active" : ""}`
-            }
-          >
-            Сохранённые фильмы
-          </NavLink>*/

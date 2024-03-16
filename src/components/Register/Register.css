@@ -1,4 +1,4 @@
-.login {
+.register {
   display: flex;
   font-family: "Roboto";
   flex-direction: column;
@@ -7,50 +7,54 @@
   margin: 0 auto;
   margin-top: 70px;
 }
-.Login__img {
+.register__img {
   width: 38px;
   height: 38px;
 }
-.login__welcome {
+.register__welcome {
   font-size: 24px;
   font-family: "Inter";
   font-weight: 5 00;
   margin: 0;
   margin-top: 40px;
 }
-.login__form {
+.register__form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 40px;
 }
-.login__form input {
+.register__form input {
   all: unset;
   border-bottom: 2px solid #cccccc;
   height: 27px;
   font-size: 14px;
   font-family: "Inter";
 }
-.login__form input[type="password"] {
+.register__form input[type="password"] {
 }
-.login__signup {
+.register__signin {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 32px;
+  gap: 6px;
 }
-.login__signup p {
-  margin-right: 12px;
+.register__signin p {
+  margin: 0;
+  margin-top: 16px;
+  font-size: 14px;
+  font-family: "Inter";
+  color: #a0a0a0;
 }
-.signup__link {
+.register__link {
   color: white;
 }
-.login__button-container {
+.register__button-container {
   display: flex;
   justify-content: center;
   margin-top: 216px;
 }
-.login__link {
+.register__link {
   border: none;
   width: 100%;
   height: 45px;
@@ -60,29 +64,32 @@
   background-color: #3456f3;
   font-family: "Inter";
 }
-.login__name {
+.register__name {
   margin: 0;
   color: #a0a0a0;
   font-family: "Inter";
   font-size: 10px;
 }
-.login__name:nth-child(4) {
+.register__name:nth-child(3) {
   margin-top: 24px;
 }
-.Login__signup {
+.register__name:nth-child(5) {
+  margin-top: 24px;
+}
+.register__signin {
   display: flex;
   align-items: center;
   gap: 6px;
   justify-content: center;
 }
-.Login__signup p {
+.register__signin p {
   margin: 0;
   margin-top: 16px;
   font-size: 14px;
   font-family: "Inter";
   color: #a0a0a0;
 }
-.Login__register-link {
+.register__register-link {
   margin: 0;
   margin-top: 16px;
   color: #3456f3;
@@ -91,19 +98,19 @@
   font-family: "Inter";
 }
 @media (max-width: 456px) {
-  .login {
+  .register {
     width: 260px;
   }
-  .Login__img {
+  .register__img {
     margin: 0 auto;
   }
-  .login__welcome {
+  .register__welcome {
     text-align: center;
   }
-  .Login__register-link {
+  .register__register-link {
     font-size: 12px;
   }
-  .Login__signup p {
+  .register__signup p {
     font-size: 12px;
   }
 }

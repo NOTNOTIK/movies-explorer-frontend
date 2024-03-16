@@ -55,7 +55,6 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 0;
   justify-content: space-between;
 }
 .header__list li {
@@ -90,10 +89,6 @@
   }
   .header__burger.active span {
     transform: scale(0);
-  }
-  .header__burger.active {
-    position: fixed;
-    right: 25px;
   }
   .header__burger::before {
     top: 0;
@@ -144,11 +139,8 @@
   .header-movies__link#first {
     display: block;
   }
-  .header__list {
-    margin-top: 100%;
-  }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .header-movies {
     width: 283px;
     margin: 0 auto;

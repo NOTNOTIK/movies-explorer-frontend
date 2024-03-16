@@ -20,6 +20,9 @@
 }
 .footer__year {
   font-family: "Inter";
+  margin: 0;
+  margin-bottom: 20px;
+  color: #a0a0a0;
 }
 .footer__nav {
   display: flex;
@@ -29,4 +32,24 @@
   font-family: "Inter";
   color: black;
   text-decoration: none;
+}
+@media (max-width: 768px) {
+  .Footer {
+    margin-top: 149px;
+  }
+  .footer__title {
+    margin: 0 10px;
+    font-size: 12px;
+  }
+  .footer__container {
+    margin: 0 auto;
+    margin-top: 30px;
+    gap: 30px;
+    flex-direction: column-reverse;
+  }
+  .footer__nav {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
 }
