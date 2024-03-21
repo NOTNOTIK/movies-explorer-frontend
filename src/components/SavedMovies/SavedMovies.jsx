@@ -13,7 +13,9 @@ export default function SavedMovies() {
   return (
     <div className="App">
       <header className="header-movies">
-        <img className="header__logo" src={logo} />
+        <NavLink to="/">
+          <img className="header__logo" src={logo} />
+        </NavLink>
         <div
           className={isToggled ? "header__burger active" : "header__burger"}
           onClick={toggleClass}

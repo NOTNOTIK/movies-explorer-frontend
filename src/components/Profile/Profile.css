@@ -55,6 +55,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  padding: 0;
   justify-content: space-between;
 }
 .header__list li {
@@ -89,6 +90,10 @@
   }
   .header__burger.active span {
     transform: scale(0);
+  }
+  .header__burger.active {
+    position: fixed;
+    right: 25px;
   }
   .header__burger::before {
     top: 0;
@@ -139,15 +144,119 @@
   .header-movies__link#first {
     display: block;
   }
+  .header__list {
+    margin-top: 100%;
+  }
 }
 @media (max-width: 768px) {
   .header-movies {
     width: 90%;
     padding: 0;
-    margin: 0 auto;
     justify-content: space-between;
   }
   .header__nav.active {
     width: 100%;
+  }
+}
+
+.profile__container {
+  display: flex;
+  height: 14px;
+  align-items: center;
+  gap: 149px;
+}
+.profile__container:nth-child(1) {
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 16px;
+}
+.profile__container:nth-child(2) {
+  margin-top: 17px;
+}
+.profile {
+  display: flex;
+  font-family: "Roboto";
+  flex-direction: column;
+  align-items: center;
+  width: 396px;
+  margin: 0 auto;
+  margin-top: 70px;
+}
+.profile__img {
+  width: 38px;
+  height: 38px;
+}
+.profile__welcome {
+  font-size: 24px;
+  font-family: "Inter";
+  font-weight: 500;
+  margin: 0;
+  margin-top: 40px;
+}
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 123px;
+}
+.profile__form input {
+  all: unset;
+  color: black;
+  text-align: end;
+  font-size: 11px;
+  width: 120px;
+  font-family: "Inter";
+}
+
+.profile__link {
+  border: none;
+  width: 100%;
+  height: 45px;
+  font-size: 11px;
+  cursor: pointer;
+  color: white;
+  background-color: #3456f3;
+  font-family: "Inter";
+}
+.profile__name {
+  margin: 0;
+  color: black;
+  font-weight: 500;
+  font-family: "Inter";
+  font-size: 11px;
+  width: 141px;
+}
+.profile__name:nth-child(4) {
+  margin-top: 24px;
+}
+.profile__edit {
+  all: unset;
+  cursor: pointer;
+  font-family: "Inter";
+  font-size: 13px;
+  margin-top: 220px;
+}
+.profile__out {
+  all: unset;
+  margin-top: 16px;
+  color: red;
+  cursor: pointer;
+  font-family: "Inter";
+  font-size: 13px;
+}
+@media (max-width: 456px) {
+  .profile {
+    width: 260px;
+  }
+  .profile__img {
+    margin: 0 auto;
+  }
+  .profile__welcome {
+    text-align: center;
+  }
+  .profile__container {
+    gap: 0px;
+  }
+  .profile__name {
+    width: 130px;
   }
 }

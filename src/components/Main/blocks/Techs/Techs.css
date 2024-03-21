@@ -87,9 +87,9 @@
   }
   .Techs__nav {
     padding: 0;
+    justify-content: center;
     margin-top: 51px;
     flex-wrap: wrap;
-    margin-left: 71px;
     margin-bottom: 70px;
   }
   .Techs__block {

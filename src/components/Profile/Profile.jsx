@@ -1,15 +1,34 @@
-import "./Movies.css";
+import "./Profile.css";
 import logo from "../../images/logo.svg";
 import account from "../../images/account.png";
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import { NavLink, Link } from "react-router-dom";
 export default function Movies() {
   const [isToggled, setIsToggled] = useState(false);
 
   const toggleClass = () => {
     setIsToggled(!isToggled);
   };
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    //handleLogin(formValue.email, formValue.password);
+  };
+
   return (
     <div className="App">
       <header className="header-movies">
@@ -73,56 +92,41 @@ export default function Movies() {
           </ul>
         </nav>
       </header>
-      <form className="SearchForm">
-        <input
-          className="SearchForm__input"
-          type="text"
-          placeholder="Фильм"
-        ></input>
-        <button className="SearchForm__button">Найти</button>
-      </form>
-      <label className="checkbox-ios">
-        <input type="checkbox" />
-        <span className="checkbox-ios-switch"></span>
-        <p className="checkbox-ios-switch__text">Короткометражки</p>
-      </label>
-      <MoviesCardList />
-      <footer className="Footer">
-        <h2 className="footer__title">
-          Учебный проект Яндекс.Практикум х BeatFilm.
-        </h2>
-        <div className="footer__container">
-          <p className="footer__year">&copy;2024</p>
-          <nav className="footer__nav">
-            <a className="footer__link" href="https://practicum.yandex.ru">
-              Яндекс.Практикум
-            </a>
-            <a
-              className="footer__link"
-              href="https://github.com/Yandex-Practicum"
-            >
-              GitHub
-            </a>
-          </nav>
-        </div>
-      </footer>
+      <div className="profile">
+        <p className="profile__welcome">Привет, Егор</p>
+        <form onSubmit={handleSubmit} className="profile__form">
+          <div className="profile__container">
+            <p className="profile__name">Имя</p>
+            <input
+              required
+              id="name"
+              name="name"
+              type="name"
+              placeholder="Егор"
+              value={formValue.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="profile__container">
+            <p className="profile__name">E-mail</p>
+            <input
+              required
+              id="email"
+              name="email"
+              type="email"
+              placeholder="egormaltsev2412@gmail.com"
+              value={formValue.email}
+              onChange={handleChange}
+            />
+          </div>
+        </form>
+        <button type="button" className="profile__edit">
+          Редактировать
+        </button>
+        <Link to="/" type="button" className="profile__out">
+          Выйти из аккаунта
+        </Link>
+      </div>
     </div>
   );
 }
-/* 
-          <NavLink
-            to="/movies"
-            className={({ isActive }) =>
-              `header-movies__link ${isActive ? "header-movies_active" : ""}`
-            }
-          >
-            Фильмы
-          </NavLink>
-          <NavLink
-            to="/savedMovies"
-            className={({ isActive }) =>
-              `header-movies__link ${isActive ? "header-movies_active" : ""}`
-            }
-          >
-            Сохранённые фильмы
-          </NavLink>*/

@@ -2,6 +2,7 @@ import React from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import logo from "../../images/logo.svg";
 const Login = () => {
   const [formValue, setFormValue] = useState({
@@ -26,7 +27,9 @@ const Login = () => {
 
   return (
     <div className="login">
-      <img className="Login__img" src={logo} />
+      <NavLink to="/">
+        <img className="Login__img" src={logo} />
+      </NavLink>
       <p className="login__welcome">Рады видеть</p>
       <form onSubmit={handleSubmit} className="login__form">
         <p className="login__name">E-mail</p>

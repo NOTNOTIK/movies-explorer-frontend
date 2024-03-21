@@ -18,7 +18,11 @@ export default function AboutMe() {
             связи №54 им. П. М. Вострухина. Хочу найти работу и перехать жить
             отдельно
           </p>
-          <a className="AboutMe__Link" href="https://github.com/NOTNOTIK">
+          <a
+            className="AboutMe__Link"
+            href="https://github.com/NOTNOTIK"
+            target="_blank"
+          >
             GitHub
           </a>
         </div>

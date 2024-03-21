@@ -8,6 +8,7 @@ import SavedMovies from "../components/SavedMovies/SavedMovies";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import PageNotFound from "../components/PageNotFound/PageNotFound";
+import Profile from "../components/Profile/Profile";
 import { FormValidator } from "../validation/FormValidator";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/savedMovies" element={<SavedMovies />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

@@ -43,6 +43,9 @@
   margin: 0 auto;
 }
 .promo__button p {
+  text-decoration: none;
+
+  color: white;
   margin: 0;
   font-size: 12px;
 }

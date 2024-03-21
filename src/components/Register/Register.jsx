@@ -2,6 +2,7 @@ import React from "react";
 import "./Register.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import logo from "../../images/logo.svg";
 const Register = () => {
   const [formValue, setFormValue] = useState({
@@ -27,7 +28,9 @@ const Register = () => {
 
   return (
     <div className="register">
-      <img className="register__img" src={logo} />
+      <NavLink to="/">
+        <img className="register__img" src={logo} />
+      </NavLink>
       <p className="register__welcome">Добро пожаловать!</p>
       <form onSubmit={handleSubmit} className="register__form">
         <p className="register__name">Имя</p>
