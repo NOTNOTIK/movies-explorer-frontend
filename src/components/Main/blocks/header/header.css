@@ -1,10 +1,9 @@
 .header {
-  height: 74px;
   display: flex;
   align-items: center;
   color: white;
   justify-content: space-between;
-  padding: 0px 70px 0px 70px;
+  padding: 18px 70px 0px 70px;
   font-family: "Inter";
   background-color: #073042;
 }
@@ -17,7 +16,6 @@
 .header__button {
   font-family: "Inter";
   width: 76px;
-  height: 32px;
   background-color: #2be080;
   font-weight: 500;
   border-radius: 3px;
@@ -30,7 +28,6 @@
 }
 @media (max-width: 768px) {
   .header {
-    width: 100%;
-    padding: 0;
+    padding: 18px 14px 18px 14px;
   }
 }

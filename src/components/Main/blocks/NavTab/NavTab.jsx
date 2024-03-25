@@ -1,7 +1,7 @@
 import "./NavTab.css";
 export default function NavTab() {
   return (
-    <section className="NavTab">
+    <section className="NavTab" id="NavTab">
       <h2 className="NavTab__title">О проекте</h2>
       <div className="NavTab__info">
         <div className="NavTab__info-content">

@@ -1,6 +1,6 @@
 .NavTab {
   margin: 0;
-  height: 608px;
+  padding-bottom: 110px;
   display: flex;
   font-family: "Inter";
   flex-direction: column;
@@ -46,7 +46,7 @@
 }
 .NavTab__deadline-4week {
   width: 912px;
-  height: 36px;
+  padding: 9px;
   background-color: #f2f2f2;
   align-items: center;
   display: flex;
@@ -56,7 +56,7 @@
 .NavTab__deadline-1week {
   background-color: #2be080;
   width: 228px;
-  height: 36px;
+  padding: 9px;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -79,7 +79,7 @@
     font-size: 14px;
   }
   .NavTab {
-    height: 585px;
+    padding-bottom: 90px;
   }
   .NavTab__info {
     margin-left: 50px;
@@ -108,7 +108,7 @@
     font-size: 11px;
   }
   .NavTab {
-    height: 641px;
+    padding-bottom: 69px;
   }
   .NavTab__info {
     margin-left: 18px;

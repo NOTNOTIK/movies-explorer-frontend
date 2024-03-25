@@ -1,5 +1,5 @@
 .promo {
-  height: 574px;
+  padding-bottom: 75px;
   background-color: #073042;
   color: white;
   font-family: "Inter";
@@ -31,12 +31,12 @@
 }
 .promo__button {
   width: 129px;
-  height: 36px;
+  padding: 10px;
   background: none;
   color: inherit;
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 3px;
-  padding: 0;
+
   font: inherit;
   cursor: pointer;
   outline: inherit;
@@ -49,11 +49,14 @@
   margin: 0;
   font-size: 12px;
 }
+.promo__button a {
+  all: unset;
+}
 @media (max-width: 1268px) {
   .promo__logo {
     position: static;
     width: 310px;
-    height: 304px;
+
     margin: 0 auto;
     margin-top: 140px;
     margin-bottom: 48px;
@@ -61,7 +64,7 @@
   .promo {
     flex-direction: column;
     align-items: center;
-    height: 784px;
+
     align-items: center;
     padding-bottom: 76px;
   }
@@ -87,7 +90,6 @@
   .promo__logo {
     position: static;
     width: 210px;
-    height: 206px;
     margin: 0 auto;
     margin-top: 70px;
     margin-bottom: 44px;
@@ -95,7 +97,7 @@
   .promo {
     flex-direction: column;
     align-items: center;
-    height: 636px;
+
     align-items: center;
     padding-bottom: 30px;
   }

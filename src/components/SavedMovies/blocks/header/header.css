@@ -1,6 +1,5 @@
 .header-movies {
   background-color: white;
-  height: 74px;
   display: flex;
   align-items: center;
   color: black;
@@ -15,7 +14,7 @@
 .header__button {
   font-family: "Inter";
   width: 76px;
-  height: 32px;
+
   background-color: #2be080;
   font-weight: 500;
   border-radius: 3px;
@@ -31,7 +30,7 @@
   justify-content: space-between;
   margin-left: 364px;
   gap: 7px;
-  height: 32px;
+
   width: 100px;
   border-radius: 40px;
   box-shadow: 0px 7px 34px -9px rgba(0, 0, 0, 0.3);
@@ -45,7 +44,7 @@
 }
 .header__account-image {
   width: 13px;
-  height: 13px;
+
   padding: 8px;
   margin-right: 3px;
   background-color: #f9f9f9;

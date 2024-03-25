@@ -4,6 +4,7 @@ import account from "../../images/account.png";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import FilterCheckbox from "./blocks/FilterCheckbox/FilterCheckbox";
 export default function SavedMovies() {
   const [isToggled, setIsToggled] = useState(false);
 
@@ -63,10 +64,12 @@ export default function SavedMovies() {
             </li>
 
             <li>
-              <div className="header__account">
-                <p className="header__account-name">Аккаунт</p>
-                <img className="header__account-image" src={account} />
-              </div>
+              <NavLink to="/profile">
+                <div className="header__account">
+                  <p className="header__account-name">Аккаунт</p>
+                  <img className="header__account-image" src={account} />
+                </div>
+              </NavLink>
             </li>
           </ul>
         </nav>
@@ -79,11 +82,7 @@ export default function SavedMovies() {
         ></input>
         <button className="SearchForm__button">Найти</button>
       </form>
-      <label className="checkbox-ios">
-        <input type="checkbox" />
-        <span className="checkbox-ios-switch"></span>
-        <p className="checkbox-ios-switch__text">Короткометражки</p>
-      </label>
+      <FilterCheckbox />
       <MoviesCardList />
       <footer className="Footer">
         <h2 className="footer__title">

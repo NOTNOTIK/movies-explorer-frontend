@@ -4,6 +4,7 @@ import account from "../../images/account.png";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import FilterCheckbox from "./blocks/FilterCheckbox/FilterCheckbox";
 export default function Movies() {
   const [isToggled, setIsToggled] = useState(false);
 
@@ -81,11 +82,7 @@ export default function Movies() {
         ></input>
         <button className="SearchForm__button">Найти</button>
       </form>
-      <label className="checkbox-ios">
-        <input type="checkbox" />
-        <span className="checkbox-ios-switch"></span>
-        <p className="checkbox-ios-switch__text">Короткометражки</p>
-      </label>
+      <FilterCheckbox />
       <MoviesCardList />
       <footer className="Footer">
         <h2 className="footer__title">

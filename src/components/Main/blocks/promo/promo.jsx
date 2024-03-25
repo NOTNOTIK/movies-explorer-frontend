@@ -14,9 +14,9 @@ export default function Promo() {
           Листайте ниже, чтобы узнать больше про этот проект и его создателя.
         </p>
         <button className="promo__button">
-          <NavLink to="/">
-            <p>Узнать больше</p>
-          </NavLink>
+          <p>
+            <a href="#NavTab">Узнать больше</a>
+          </p>
         </button>
       </div>
     </section>
