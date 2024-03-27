@@ -12,10 +12,10 @@ export default function Movies() {
     setIsToggled(!isToggled);
   };
   return (
-    <div className="App">
+    <section className="App">
       <header className="header-movies">
         <NavLink to="/">
-          <img className="header__logo" src={logo} />
+          <img className="header__logo" src={logo} alt={logo} />
         </NavLink>
         <div
           className={isToggled ? "header__burger active" : "header__burger"}
@@ -74,17 +74,21 @@ export default function Movies() {
           </ul>
         </nav>
       </header>
-      <form className="SearchForm">
-        <input
-          className="SearchForm__input"
-          type="text"
-          placeholder="Фильм"
-        ></input>
-        <button className="SearchForm__button">Найти</button>
-      </form>
-      <FilterCheckbox />
-      <MoviesCardList />
-      <footer className="Footer">
+      <main className="movies-main">
+        <form className="SearchForm">
+          <input
+            className="SearchForm__input"
+            type="text"
+            placeholder="Фильм"
+          ></input>
+          <button className="SearchForm__button" type="button">
+            Найти
+          </button>
+        </form>
+        <FilterCheckbox />
+        <MoviesCardList />
+      </main>
+      <footer className="footer">
         <h2 className="footer__title">
           Учебный проект Яндекс.Практикум х BeatFilm.
         </h2>
@@ -103,23 +107,6 @@ export default function Movies() {
           </nav>
         </div>
       </footer>
-    </div>
+    </section>
   );
 }
-/* 
-          <NavLink
-            to="/movies"
-            className={({ isActive }) =>
-              `header-movies__link ${isActive ? "header-movies_active" : ""}`
-            }
-          >
-            Фильмы
-          </NavLink>
-          <NavLink
-            to="/savedMovies"
-            className={({ isActive }) =>
-              `header-movies__link ${isActive ? "header-movies_active" : ""}`
-            }
-          >
-            Сохранённые фильмы
-          </NavLink>*/

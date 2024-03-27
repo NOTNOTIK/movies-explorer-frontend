@@ -9,15 +9,17 @@ export default function FilterCheckbox() {
 
   return (
     <div className="checkbox">
-      <label className="checkbox__label">
-        <input
-          className="checkbox__input"
-          type="checkbox"
-          checked={isChecked}
-          onChange={handleChange}
-        />
-        <span className="checkbox__slider"></span>
-      </label>
+      <form className="checkbox__form">
+        <label className="checkbox__label">
+          <input
+            className="checkbox__input"
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleChange}
+          />
+          <span className="checkbox__slider"></span>
+        </label>
+      </form>
       <p className="checkbox__name">Короткометражки</p>
     </div>
   );

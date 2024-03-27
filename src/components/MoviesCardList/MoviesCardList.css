@@ -48,10 +48,16 @@
     column-gap: 30px;
     row-gap: 30px;
   }
+  .cards__container {
+    margin: 0 70px;
+  }
 }
 @media (max-width: 767px) {
   .button__container {
     width: 240px;
     margin: 0 auto;
+  }
+  .cards__container {
+    margin: 0 14px;
   }
 }

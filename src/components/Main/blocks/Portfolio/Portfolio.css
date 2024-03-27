@@ -9,6 +9,9 @@
   font-size: 18px;
   font-weight: 400;
 }
+.Portfolio__list {
+  padding: 0;
+}
 .Portfolio__block {
   display: flex;
   align-items: center;
@@ -16,8 +19,16 @@
   margin-right: 70px;
   margin-left: 70px;
 }
-.Portfolio__block:nth-child(2) {
+.Portfolio__block a {
+  text-decoration: none;
+  color: black;
+  display: contents;
+}
+.Portfolio__block:nth-child(1) {
   margin-top: 50px;
+}
+.Portfolio__block:nth-child(2) {
+  border-top: 1px solid #e8e8e8;
 }
 .Portfolio__block:nth-child(3) {
   border-bottom: 1px solid #e8e8e8;

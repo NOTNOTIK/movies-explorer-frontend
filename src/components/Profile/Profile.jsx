@@ -30,10 +30,10 @@ export default function Movies() {
   };
 
   return (
-    <div className="App">
+    <section className="App">
       <header className="header-movies">
         <NavLink to="/">
-          <img className="header__logo" src={logo} />
+          <img className="header__logo" src={logo} alt={logo} />
         </NavLink>
         <div
           className={isToggled ? "header__burger active" : "header__burger"}
@@ -92,7 +92,7 @@ export default function Movies() {
           </ul>
         </nav>
       </header>
-      <div className="profile">
+      <main className="profile">
         <p className="profile__welcome">Привет, Егор</p>
         <form onSubmit={handleSubmit} className="profile__form">
           <div className="profile__container">
@@ -126,7 +126,7 @@ export default function Movies() {
         <Link to="/" type="button" className="profile__out">
           Выйти из аккаунта
         </Link>
-      </div>
-    </div>
+      </main>
+    </section>
   );
 }

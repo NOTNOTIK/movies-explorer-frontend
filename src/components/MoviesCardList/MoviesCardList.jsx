@@ -6,14 +6,14 @@ export default function MoviesCardList() {
   ));
   return (
     <section className="cards">
-      <article className="cards__container">
+      <main className="cards__container">
         <ul className="cards__list">{cards}</ul>
         <div className="button__container">
           <button className="cards__button" type="button">
             Еще
           </button>
         </div>
-      </article>
+      </main>
     </section>
   );
 }

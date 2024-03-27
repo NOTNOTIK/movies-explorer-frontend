@@ -45,8 +45,8 @@
   text-align: center;
 }
 .NavTab__deadline-4week {
-  width: 912px;
-  padding: 9px;
+  width: 200px;
+  padding: 9px 356px;
   background-color: #f2f2f2;
   align-items: center;
   display: flex;
@@ -55,8 +55,8 @@
 
 .NavTab__deadline-1week {
   background-color: #2be080;
-  width: 228px;
-  padding: 9px;
+  width: 200px;
+  padding: 9px 14px;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -71,23 +71,29 @@
     margin-right: 50px;
   }
   .NavTab__deadline-4week {
-    width: 528px;
+    width: 118px;
+    padding: 9px 205px;
     font-size: 14px;
   }
   .NavTab__deadline-1week {
-    width: 140px;
+    width: 120px;
+    padding: 9px 10px;
     font-size: 14px;
   }
   .NavTab {
     padding-bottom: 90px;
   }
   .NavTab__info {
+    justify-content: center;
     margin-left: 50px;
     gap: 30px;
     margin-right: 50px;
   }
   .NavTab__deadline {
+    justify-content: center;
+    margin: 0 auto;
     margin-top: 93px;
+    margin-right: 50px;
     margin-left: 50px;
   }
 }
@@ -99,14 +105,7 @@
     padding-top: 70px;
     padding-bottom: 28px;
   }
-  .NavTab__deadline-4week {
-    width: 184px;
-    font-size: 11px;
-  }
-  .NavTab__deadline-1week {
-    width: 100px;
-    font-size: 11px;
-  }
+
   .NavTab {
     padding-bottom: 69px;
   }
@@ -118,8 +117,18 @@
     margin-right: 18px;
   }
   .NavTab__deadline {
+    margin: 0 18px;
     margin-top: 60px;
-    margin-left: 18px;
+  }
+  .NavTab__deadline-4week {
+    width: 80px;
+    padding: 11px 52px;
+    font-size: 11px;
+  }
+  .NavTab__deadline-1week {
+    width: 80px;
+    padding: 11px 10px;
+    font-size: 11px;
   }
   .NavTab__info-title {
     margin: 0;

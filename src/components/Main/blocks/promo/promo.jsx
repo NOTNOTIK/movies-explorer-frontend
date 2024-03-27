@@ -1,6 +1,6 @@
 import "./promo.css";
 import promo from "../../../../images/promo.svg";
-import { NavLink } from "react-router-dom";
+
 export default function Promo() {
   return (
     <section className="promo">

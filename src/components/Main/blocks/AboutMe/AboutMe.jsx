@@ -4,7 +4,7 @@ export default function AboutMe() {
   return (
     <section className="AboutMe">
       <h2 className="AboutMe__title">Студент</h2>
-      <div className="AboutMe__content">
+      <main className="AboutMe__content">
         <img className="AboutMe__photo" src={photo} />
         <div className="AboutMe__info">
           <h3 className="AboutMe__name">Егор</h3>
@@ -26,7 +26,7 @@ export default function AboutMe() {
             GitHub
           </a>
         </div>
-      </div>
+      </main>
     </section>
   );
 }

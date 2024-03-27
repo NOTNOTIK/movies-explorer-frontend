@@ -11,26 +11,30 @@ import Techs from "./blocks/Techs/Techs";
 import { NavLink } from "react-router-dom";
 export default function Main() {
   return (
-    <div className="App">
+    <section className="App">
       <header className="header">
         <NavLink to="/">
-          <img className="header__logo" src={logo} />
+          <img className="header__logo" src={logo} alt={logo} />
         </NavLink>
         <nav className="header__nav-main">
           <NavLink to="/signup">
             <a className="header__link">Регистрация</a>
           </NavLink>
           <NavLink to="/signin">
-            <button className="header__button">Войти</button>
+            <button className="header__button" type="button">
+              Войти
+            </button>
           </NavLink>
         </nav>
       </header>
-      <Promo />
-      <NavTab />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
-      <footer className="Footer">
+      <main className="main">
+        <Promo />
+        <NavTab />
+        <Techs />
+        <AboutMe />
+        <Portfolio />
+      </main>
+      <footer className="footer">
         <h2 className="footer__title">
           Учебный проект Яндекс.Практикум х BeatFilm.
         </h2>
@@ -54,6 +58,6 @@ export default function Main() {
           </nav>
         </div>
       </footer>
-    </div>
+    </section>
   );
 }

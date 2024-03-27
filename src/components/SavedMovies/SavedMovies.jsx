@@ -12,10 +12,10 @@ export default function SavedMovies() {
     setIsToggled(!isToggled);
   };
   return (
-    <div className="App">
+    <section className="App">
       <header className="header-movies">
         <NavLink to="/">
-          <img className="header__logo" src={logo} />
+          <img className="header__logo" src={logo} alt={logo} />
         </NavLink>
         <div
           className={isToggled ? "header__burger active" : "header__burger"}
@@ -74,16 +74,20 @@ export default function SavedMovies() {
           </ul>
         </nav>
       </header>
-      <form className="SearchForm">
-        <input
-          className="SearchForm__input"
-          type="text"
-          placeholder="Фильм"
-        ></input>
-        <button className="SearchForm__button">Найти</button>
-      </form>
-      <FilterCheckbox />
-      <MoviesCardList />
+      <main className="movies-main">
+        <form className="SearchForm">
+          <input
+            className="SearchForm__input"
+            type="text"
+            placeholder="Фильм"
+          ></input>
+          <button className="SearchForm__button" type="button">
+            Найти
+          </button>
+        </form>
+        <FilterCheckbox />
+        <MoviesCardList />
+      </main>
       <footer className="Footer">
         <h2 className="footer__title">
           Учебный проект Яндекс.Практикум х BeatFilm.
@@ -103,6 +107,6 @@ export default function SavedMovies() {
           </nav>
         </div>
       </footer>
-    </div>
+    </section>
   );
 }
