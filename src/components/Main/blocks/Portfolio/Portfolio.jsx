@@ -11,19 +11,19 @@ export default function Portfolio() {
             target="_blank"
           >
             <h3 className="Portfolio__performance">Учебный проект Mesto</h3>
-            <img className="Portfolio__arrow" src={arrow} />
+            <img className="Portfolio__arrow" src={arrow} alt="Кнопка" />
           </a>
         </li>
         <li className="Portfolio__block">
           <a href="https://notnotik.github.io/POIZON/" target="_blank">
             <h3 className="Portfolio__performance">Одностраничный сайт</h3>
-            <img className="Portfolio__arrow" src={arrow} />
+            <img className="Portfolio__arrow" src={arrow} alt="Кнопка" />
           </a>
         </li>
         <li className="Portfolio__block">
           <a href="https://notnotik.github.io/VITA-seprik/" target="_blank">
             <h3 className="Portfolio__performance">Адаптивный сайт</h3>
-            <img className="Portfolio__arrow" src={arrow} />
+            <img className="Portfolio__arrow" src={arrow} alt="Кнопка" />
           </a>
         </li>
       </ul>

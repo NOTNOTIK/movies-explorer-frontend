@@ -1,9 +1,9 @@
 import "./NavTab.css";
 export default function NavTab() {
   return (
-    <section className="NavTab" id="NavTab">
+    <main className="NavTab" id="NavTab">
       <h2 className="NavTab__title">О проекте</h2>
-      <main className="NavTab__main">
+      <section className="NavTab__main">
         <div className="NavTab__info">
           <div className="NavTab__info-content">
             <h3 className="NavTab__info-title">
@@ -34,7 +34,7 @@ export default function NavTab() {
             <p className="NavTab__deadline-text">Front-end</p>
           </div>
         </div>
-      </main>
-    </section>
+      </section>
+    </main>
   );
 }

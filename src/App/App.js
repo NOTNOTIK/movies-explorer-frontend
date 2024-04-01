@@ -14,6 +14,15 @@ import { FormValidator } from "../validation/FormValidator";
 function App() {
   const [cards, setCards] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
+  const [burgerMenu, setBurgerMenu] = useState(false);
+
+  const openBurgerMenu = () => {
+    setBurgerMenu(true);
+  };
+
+  const closeBurgerMenu = () => {
+    setBurgerMenu(false);
+  };
   function handleCardLike(card) {
     console.log("хуйхуйхуй");
     const isLiked = card.likes.some((item) => item._id === currentUser._id);
@@ -35,8 +44,15 @@ function App() {
           element={<Movies />}
           onCardLike={handleCardLike}
           cards={cards}
+          openBurger={openBurgerMenu}
         />
-        <Route path="/savedMovies" element={<SavedMovies />} />
+        <Route
+          path="/savedMovies"
+          element={<SavedMovies />}
+          onCardLike={handleCardLike}
+          cards={cards}
+          openBurger={openBurgerMenu}
+        />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/profile" element={<Profile />} />

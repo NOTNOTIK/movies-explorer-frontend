@@ -1,10 +1,10 @@
 .cards {
   padding-top: 120px;
-}
-
-.cards__container {
   max-width: 1140px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .cards__list {
@@ -13,28 +13,20 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  row-gap: 32px;
+  row-gap: 37px;
   column-gap: 20px;
   list-style: none;
   padding: 0;
   margin: 0 auto;
 }
 
-.button__container {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
 .cards__button {
-  margin: 80px auto 80px auto;
+  margin: 60px auto 160px auto;
   max-width: 1140px;
   width: 320px;
   height: 36px;
-  border: 1px solid rgb(66, 66, 66);
+  border: none;
+  background-color: #f9f9f9;
   border-radius: 6px;
   background-color: transparent;
   cursor: pointer;
@@ -48,15 +40,24 @@
     column-gap: 30px;
     row-gap: 30px;
   }
-  .cards__container {
-    margin: 0 70px;
+  .cards {
+    padding-top: 80px;
   }
 }
 @media (max-width: 767px) {
-  .button__container {
+  .cards {
+    padding-top: 39px;
+  }
+  .cards__list {
+    row-gap: 33px;
+  }
+  .cards__button {
     width: 240px;
     margin: 0 auto;
+    margin-top: 58px;
+    margin-bottom: 157px;
   }
+
   .cards__container {
     margin: 0 14px;
   }

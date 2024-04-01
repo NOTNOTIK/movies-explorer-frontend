@@ -8,23 +8,23 @@ import Promo from "./blocks/promo/promo";
 import Portfolio from "./blocks/Portfolio/Portfolio";
 import Techs from "./blocks/Techs/Techs";
 
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function Main() {
   return (
-    <section className="App">
+    <>
       <header className="header">
-        <NavLink to="/">
-          <img className="header__logo" src={logo} alt={logo} />
-        </NavLink>
+        <Link to="/">
+          <img className="header__logo" src={logo} alt="Лого" />
+        </Link>
         <nav className="header__nav-main">
-          <NavLink to="/signup">
+          <Link to="/signup">
             <a className="header__link">Регистрация</a>
-          </NavLink>
-          <NavLink to="/signin">
+          </Link>
+          <Link to="/signin">
             <button className="header__button" type="button">
               Войти
             </button>
-          </NavLink>
+          </Link>
         </nav>
       </header>
       <main className="main">
@@ -58,6 +58,6 @@ export default function Main() {
           </nav>
         </div>
       </footer>
-    </section>
+    </>
   );
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 const Login = () => {
   const [formValue, setFormValue] = useState({
@@ -26,12 +26,12 @@ const Login = () => {
   };
 
   return (
-    <section className="login">
-      <main className="login__container">
-        <NavLink to="/" className="login__img">
-          <img src={logo} alt={logo} />
-        </NavLink>
-        <h1 className="login__welcome">Рады видеть</h1>
+    <>
+      <main className="login">
+        <Link to="/" className="login__img">
+          <img src={logo} alt="Лого" />
+        </Link>
+        <h1 className="login__welcome">Рады видеть!</h1>
         <form onSubmit={handleSubmit} className="login__form">
           <p className="login__name">E-mail</p>
           <input
@@ -39,6 +39,7 @@ const Login = () => {
             id="email"
             name="email"
             type="email"
+            placeholder="E-mail"
             value={formValue.email}
             onChange={handleChange}
           />
@@ -49,6 +50,7 @@ const Login = () => {
             id="password"
             name="password"
             type="password"
+            placeholder="Пароль"
             value={formValue.password}
             onChange={handleChange}
           />
@@ -66,7 +68,7 @@ const Login = () => {
           </div>
         </form>
       </main>
-    </section>
+    </>
   );
 };
 

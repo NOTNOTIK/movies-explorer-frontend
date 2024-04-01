@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 13px;
-  margin-top: 70px;
+  margin-top: 85px;
 }
 .SearchForm__input {
   all: unset;
@@ -30,13 +30,22 @@
   cursor: pointer;
   outline: inherit;
 }
+@media (max-width: 1268px) {
+  .SearchForm {
+    margin: 0 30px;
+    margin-top: 95px;
+  }
+}
 
 @media (max-width: 767px) {
   .SearchForm {
     margin-left: 14px;
     margin-right: 14px;
+    margin-top: 83px;
+    padding-bottom: 10px;
   }
   .SearchForm__input {
     font-size: 18px;
+    width: 200px;
   }
 }

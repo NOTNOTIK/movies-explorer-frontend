@@ -30,26 +30,34 @@ export default function Movies() {
   };
 
   return (
-    <section className="App">
-      <header className="header-movies">
-        <NavLink to="/">
-          <img className="header__logo" src={logo} alt={logo} />
-        </NavLink>
+    <>
+      <header className="header-profile">
+        <Link to="/">
+          <img className="header-profile__logo" src={logo} alt="Лого" />
+        </Link>
         <div
-          className={isToggled ? "header__burger active" : "header__burger"}
+          className={
+            isToggled
+              ? "header-profile__burger active"
+              : "header-profile__burger"
+          }
           onClick={toggleClass}
         >
           <span></span>
         </div>
-        <nav className={isToggled ? "header__nav active" : "header__nav"}>
-          <ul className="header__list">
+        <nav
+          className={
+            isToggled ? "header-profile__nav active" : "header-profile__nav"
+          }
+        >
+          <ul className="header-profile__list">
             <li>
               <NavLink
                 to="/"
                 id="first"
                 className={({ isActive }) =>
-                  `header-movies__link ${
-                    isActive ? "header-movies_active" : ""
+                  `header-profile__link ${
+                    isActive ? "header-profile_active" : ""
                   }`
                 }
               >
@@ -60,8 +68,8 @@ export default function Movies() {
               <NavLink
                 to="/movies"
                 className={({ isActive }) =>
-                  `header-movies__link ${
-                    isActive ? "header-movies_active" : ""
+                  `header-profile__link ${
+                    isActive ? "header-profile_active" : ""
                   }`
                 }
               >
@@ -72,8 +80,8 @@ export default function Movies() {
               <NavLink
                 to="/savedMovies"
                 className={({ isActive }) =>
-                  `header-movies__link ${
-                    isActive ? "header-movies_active" : ""
+                  `header-profile__link ${
+                    isActive ? "header-profile_active" : ""
                   }`
                 }
               >
@@ -83,9 +91,13 @@ export default function Movies() {
 
             <li>
               <NavLink to="/profile">
-                <div className="header__account">
-                  <p className="header__account-name">Аккаунт</p>
-                  <img className="header__account-image" src={account} />
+                <div className="header-profile__account">
+                  <p className="header-profile__account-name">Аккаунт</p>
+                  <img
+                    className="header-profile__account-image"
+                    src={account}
+                    alt="#"
+                  />
                 </div>
               </NavLink>
             </li>
@@ -93,7 +105,7 @@ export default function Movies() {
         </nav>
       </header>
       <main className="profile">
-        <p className="profile__welcome">Привет, Егор</p>
+        <p className="profile__welcome">Привет, Егор!</p>
         <form onSubmit={handleSubmit} className="profile__form">
           <div className="profile__container">
             <p className="profile__name">Имя</p>
@@ -127,6 +139,6 @@ export default function Movies() {
           Выйти из аккаунта
         </Link>
       </main>
-    </section>
+    </>
   );
 }

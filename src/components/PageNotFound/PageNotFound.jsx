@@ -9,14 +9,19 @@ function PageNotFound() {
     navigate(-1);
   }
   return (
-    <main className="not-found">
-      <h1 className="not-found__title">
-        <span>404</span>Страница не найдена
-      </h1>
-      <Link className="button button_type_to-main" to="/" onClick={handleClick}>
-        Назад
-      </Link>
-    </main>
+    <>
+      <main className="not-found">
+        <h1 className="not-found__title"> 404</h1>
+        <p className="not-found__text">Страница не найдена</p>
+        <Link
+          className="button button_type_to-main"
+          to="/"
+          onClick={handleClick}
+        >
+          Назад
+        </Link>
+      </main>
+    </>
   );
 }
 

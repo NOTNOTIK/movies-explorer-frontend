@@ -2,10 +2,10 @@ import photo from "../../../../images/student.jpg";
 import "./AboutMe.css";
 export default function AboutMe() {
   return (
-    <section className="AboutMe">
+    <main className="AboutMe">
       <h2 className="AboutMe__title">Студент</h2>
-      <main className="AboutMe__content">
-        <img className="AboutMe__photo" src={photo} />
+      <section className="AboutMe__content">
+        <img className="AboutMe__photo" src={photo} alt="Фотография Егора" />
         <div className="AboutMe__info">
           <h3 className="AboutMe__name">Егор</h3>
           <p className="AboutMe__age">Веб-разработчик, 19 лет</p>
@@ -26,7 +26,7 @@ export default function AboutMe() {
             GitHub
           </a>
         </div>
-      </main>
-    </section>
+      </section>
+    </main>
   );
 }

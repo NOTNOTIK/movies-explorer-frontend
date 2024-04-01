@@ -1,3 +1,3 @@
-@import url(./blocks/header/header.css);
-@import url(./blocks/SearchForm/SearchForm.css);
-@import url(./blocks/FilterCheckbox/FilterCheckbox.css);
+@import url(../Movies/blocks/header/header.css);
+@import url(../Movies/blocks/SearchForm/SearchForm.css);
+@import url(../Movies/blocks/FilterCheckbox/FilterCheckbox.css);

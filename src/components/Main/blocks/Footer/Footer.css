@@ -3,7 +3,6 @@
   font-family: "Inter";
   margin-left: 70px;
   margin-right: 70px;
-  margin-top: 182px;
   padding-bottom: 20px;
   font-size: 13px;
   font-weight: 400;
@@ -21,6 +20,7 @@
 .footer__year {
   font-family: "Inter";
   margin: 0;
+  font-size: 13.9px;
   margin-top: 20px;
   margin-bottom: 20px;
   color: #a0a0a0;
@@ -32,13 +32,18 @@
 .footer__link {
   font-family: "Inter";
   color: black;
-  font-size: 12px;
+  font-size: 13px;
   text-decoration: none;
 }
-@media (max-width: 768px) {
-  .footer {
-    margin-top: 149px;
+@media (max-width: 1268px) {
+  .footer__title {
+    margin: 0 30px;
   }
+  .footer__container {
+    margin: 0 30px;
+  }
+}
+@media (max-width: 767px) {
   .footer__title {
     margin: 0 10px;
     font-size: 12px;
@@ -46,12 +51,18 @@
   .footer__container {
     margin: 0 auto;
     margin-top: 30px;
-    gap: 30px;
+    gap: 12px;
     flex-direction: column-reverse;
   }
   .footer__nav {
     flex-direction: column;
     gap: 12px;
     align-items: center;
+  }
+  .footer__link {
+    font-size: 12px;
+  }
+  .footer__year {
+    font-size: 11px;
   }
 }

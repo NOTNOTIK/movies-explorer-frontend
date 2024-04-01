@@ -27,11 +27,11 @@ const Register = () => {
   };
 
   return (
-    <section className="register">
-      <main className="register__container">
-        <NavLink to="/" className="register__img">
-          <img src={logo} alt={logo} />
-        </NavLink>
+    <>
+      <main className="register">
+        <Link to="/" className="register__img">
+          <img src={logo} alt="Лого" />
+        </Link>
         <h1 className="register__welcome">Добро пожаловать!</h1>
         <form onSubmit={handleSubmit} className="register__form">
           <p className="register__name">Имя</p>
@@ -40,6 +40,9 @@ const Register = () => {
             id="name"
             name="name"
             type="text"
+            minLength={2}
+            maxLength={30}
+            placeholder="Имя"
             value={formValue.name}
             onChange={handleChange}
           />
@@ -49,6 +52,7 @@ const Register = () => {
             id="email"
             name="email"
             type="email"
+            placeholder="E-mail"
             value={formValue.email}
             onChange={handleChange}
           />
@@ -58,12 +62,15 @@ const Register = () => {
             id="password"
             name="password"
             type="password"
+            placeholder="Пароль"
+            minLength={8}
+            maxLength={30}
             value={formValue.password}
             onChange={handleChange}
           />
           <div className="register__button-container">
             <button type="submit" className="register__link">
-              Войти
+              Зарегистрироваться
             </button>
           </div>
           <div className="register__signin">
@@ -74,7 +81,7 @@ const Register = () => {
           </div>
         </form>
       </main>
-    </section>
+    </>
   );
 };
 

@@ -6,14 +6,10 @@ export default function MoviesCardList() {
   ));
   return (
     <section className="cards">
-      <main className="cards__container">
-        <ul className="cards__list">{cards}</ul>
-        <div className="button__container">
-          <button className="cards__button" type="button">
-            Еще
-          </button>
-        </div>
-      </main>
+      <ul className="cards__list">{cards}</ul>
+      <button className="cards__button" type="button">
+        Еще
+      </button>
     </section>
   );
 }
