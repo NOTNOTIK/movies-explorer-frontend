@@ -9,8 +9,7 @@ import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import PageNotFound from "../components/PageNotFound/PageNotFound";
 import Profile from "../components/Profile/Profile";
-import { FormValidator } from "../validation/FormValidator";
-
+import ProtectedRoute from "../utils/ProtectedRoute";
 function App() {
   const [cards, setCards] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
@@ -41,21 +40,33 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route
           path="/movies"
-          element={<Movies />}
-          onCardLike={handleCardLike}
-          cards={cards}
-          openBurger={openBurgerMenu}
+          element={
+            <ProtectedRoute
+              element={<Movies />}
+              onCardLike={handleCardLike}
+              cards={cards}
+              openBurger={openBurgerMenu}
+            />
+          }
         />
+
         <Route
           path="/savedMovies"
-          element={<SavedMovies />}
-          onCardLike={handleCardLike}
-          cards={cards}
-          openBurger={openBurgerMenu}
+          element={
+            <ProtectedRoute
+              element={<SavedMovies />}
+              onCardLike={handleCardLike}
+              cards={cards}
+              openBurger={openBurgerMenu}
+            />
+          }
         />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={<ProtectedRoute element={<Profile />} />}
+        />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
