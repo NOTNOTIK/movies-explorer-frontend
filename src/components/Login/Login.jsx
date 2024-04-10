@@ -4,7 +4,7 @@ import "./Login.css";
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
-const Login = () => {
+const Login = ({ handleLogin }) => {
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
@@ -22,7 +22,7 @@ const Login = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    //handleLogin(formValue.email, formValue.password);
+    handleLogin(formValue.email, formValue.password);
   };
 
   return (

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../images/logo.svg";
-const Register = () => {
+const Register = ({ handleRegister }) => {
   const [formValue, setFormValue] = useState({
     name: "",
     email: "",
@@ -23,7 +23,7 @@ const Register = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    //handleLogin(formValue.email, formValue.password);
+    handleRegister(formValue.name, formValue.email, formValue.password);
   };
 
   return (

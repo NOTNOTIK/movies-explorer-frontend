@@ -1,8 +1,9 @@
 import Main from "../components/Main/Main";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { useState, useEffect } from "react";
+import { apiMain } from "../utils/MainApi";
 import Movies from "../components/Movies/Movies";
 import SavedMovies from "../components/SavedMovies/SavedMovies";
 import Login from "../components/Login/Login";
@@ -15,6 +16,40 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [burgerMenu, setBurgerMenu] = useState(false);
 
+  const navigate = useNavigate();
+
+  const handleRegistration = (name, email, password) => {
+    const data = { name, email, password };
+
+    apiMain
+      .registration(data)
+      .then(() => {
+        navigate("/signin", { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        console.log(data);
+      });
+  };
+  const handleLogin = (email, password) => {
+    const data = { email, password };
+
+    apiMain
+      .login(data)
+      .then((res) => {
+        if (res && res.token) {
+          localStorage.setItem("jwt", res.token);
+
+          navigate("/movies", { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const openBurgerMenu = () => {
     setBurgerMenu(true);
   };
@@ -22,8 +57,8 @@ function App() {
   const closeBurgerMenu = () => {
     setBurgerMenu(false);
   };
+
   function handleCardLike(card) {
-    console.log("хуйхуйхуй");
     const isLiked = card.likes.some((item) => item._id === currentUser._id);
     const checkLike = isLiked;
 
@@ -35,7 +70,7 @@ function App() {
     });
   }
   return (
-    <BrowserRouter>
+    <>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route
@@ -61,15 +96,18 @@ function App() {
             />
           }
         />
-        <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
+        <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
+        <Route
+          path="/signup"
+          element={<Register handleRegister={handleRegistration} />}
+        />
         <Route
           path="/profile"
           element={<ProtectedRoute element={<Profile />} />}
         />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
