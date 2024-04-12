@@ -5,6 +5,10 @@
 }
 .MoviesCard__image {
   width: 100%;
+  height: 151px;
+
+  object-fit: cover;
+  object-position: center;
 }
 .MoviesCard__info {
   margin-top: 5px;
@@ -57,10 +61,16 @@
   .MoviesCard {
     width: 339px;
   }
+  .MoviesCard__image {
+    height: 190px;
+  }
 }
 @media (max-width: 767px) {
   .MoviesCard {
     width: 300px;
+  }
+  .MoviesCard__image {
+    height: 168px;
   }
   .MoviesCard__title {
     font-size: 12px;

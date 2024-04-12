@@ -4,11 +4,12 @@ class MainApi {
     this._headers = headers;
   }
 
-  _ifCheck(res) {
+  _checkRes(res) {
     if (res.ok) {
       return res.json();
     }
-    throw new Error("Ошибка!" + res.status);
+
+    throw new Error("ошибка!");
   }
 
   registration(data) {
@@ -19,18 +20,18 @@ class MainApi {
       },
 
       body: JSON.stringify(data),
-    }).then(this._ifCheck);
+    }).then(this._checkRes);
   }
 
-  login(data) {
+  authorize(email, password, jwt) {
     return fetch(`${this._url}/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
       },
-
-      body: JSON.stringify(data),
-    }).then(this._ifCheck);
+      body: JSON.stringify({ email, password }),
+    }).then(this._checkRes);
   }
 
   checkToken(jwt) {
@@ -41,7 +42,28 @@ class MainApi {
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwt}`,
       },
-    }).then(this._ifCheck);
+    }).then(this._checkRes);
+  }
+  getSavedMovies(jwt) {
+    return fetch(`${this._url}/movies`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+    }).then(this._checkRes);
+  }
+  createMovie(movieInfo, jwt) {
+    return fetch(`${this._url}/movies`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+      body: JSON.stringify({
+        movieInfo,
+      }),
+    }).then(this._checkRes);
   }
 }
 

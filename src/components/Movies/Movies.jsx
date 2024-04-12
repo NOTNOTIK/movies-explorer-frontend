@@ -5,7 +5,12 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import FilterCheckbox from "./blocks/FilterCheckbox/FilterCheckbox";
-export default function Movies() {
+export default function Movies({
+  onCardLike,
+  movies,
+  savedMovies,
+  onCardDelete,
+}) {
   const [isToggled, setIsToggled] = useState(false);
 
   const toggleClass = () => {
@@ -107,7 +112,12 @@ export default function Movies() {
           </button>
         </form>
         <FilterCheckbox />
-        <MoviesCardList />
+        <MoviesCardList
+          onCardLike={onCardLike}
+          movies={movies}
+          savedMovies={savedMovies}
+          onCardDelete={onCardDelete}
+        />
       </main>
       <footer className="footer">
         <h2 className="footer__title">

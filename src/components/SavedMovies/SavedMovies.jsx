@@ -5,9 +5,9 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import FilterCheckbox from "../Movies/blocks/FilterCheckbox/FilterCheckbox";
-export default function SavedMovies() {
+export default function SavedMovies({ savedMovies }) {
   const [isToggled, setIsToggled] = useState(false);
-
+  const [showSavedMovies, setShowSavedMovies] = useState(savedMovies);
   const toggleClass = () => {
     setIsToggled(!isToggled);
   };
@@ -105,7 +105,8 @@ export default function SavedMovies() {
           </button>
         </form>
         <FilterCheckbox />
-        <MoviesCardList />
+
+        <MoviesCardList movies={showSavedMovies} savedMovies={savedMovies} />
       </main>
       <footer className="footer">
         <h2 className="footer__title">
