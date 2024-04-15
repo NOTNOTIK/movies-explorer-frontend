@@ -1,22 +1,15 @@
-import "./SavedMovies.css";
-import logo from "../../images/logo.svg";
-import account from "../../images/account.png";
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import FilterCheckbox from "../Movies/blocks/FilterCheckbox/FilterCheckbox";
-export default function SavedMovies({ savedMovies }) {
-  const [isToggled, setIsToggled] = useState(false);
-  const [showSavedMovies, setShowSavedMovies] = useState(savedMovies);
-  const toggleClass = () => {
-    setIsToggled(!isToggled);
-  };
+import SearchForm from "../SearchForm/SearchForm";
+
+export default function SavedMovies({ handleLikeMovie }) {
   return (
     <>
       <header className="header-movies">
         <Link to="/">
           <img className="header-movies__logo" src={logo} alt={logo} />
         </Link>
+
         <div
           className={
             isToggled ? "header-movies__burger active" : "header-movies__burger"
@@ -93,20 +86,17 @@ export default function SavedMovies({ savedMovies }) {
           </nav>
         </div>
       </header>
-      <main className="main-movies">
-        <form className="SearchForm">
-          <input
-            className="SearchForm__input"
-            type="text"
-            placeholder="Фильм"
-          />
-          <button className="SearchForm__button" type="button">
-            Найти
-          </button>
-        </form>
-        <FilterCheckbox />
+      <main className="movies">
+        <SearchForm
+          handleSearch={handleSearch}
+          setSavedMovies={setSavedMovies}
+        />
 
-        <MoviesCardList movies={showSavedMovies} savedMovies={savedMovies} />
+        <MoviesCardList
+          movies={movies}
+          savedMoviesList={savedMovies}
+          handleLikeMovie={handleLikeMovie}
+        />
       </main>
       <footer className="footer">
         <h2 className="footer__title">

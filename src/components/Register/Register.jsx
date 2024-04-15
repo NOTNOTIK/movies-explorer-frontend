@@ -1,10 +1,9 @@
 import React from "react";
-import "./Register.css";
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
-const Register = ({ handleRegister }) => {
+import "./Register.css";
+export default function Register({ onRegister }) {
   const [formValue, setFormValue] = useState({
     name: "",
     email: "",
@@ -23,7 +22,7 @@ const Register = ({ handleRegister }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    handleRegister(formValue.name, formValue.email, formValue.password);
+    onRegister(formValue.name, formValue.email, formValue.password);
   };
 
   return (
@@ -32,7 +31,7 @@ const Register = ({ handleRegister }) => {
         <Link to="/" className="register__img">
           <img src={logo} alt="Лого" />
         </Link>
-        <h1 className="register__welcome">Добро пожаловать!</h1>
+        <h1 className="register__welcome">Рады видеть!</h1>
         <form onSubmit={handleSubmit} className="register__form">
           <p className="register__name">Имя</p>
           <input
@@ -40,12 +39,11 @@ const Register = ({ handleRegister }) => {
             id="name"
             name="name"
             type="text"
-            minLength={2}
-            maxLength={30}
             placeholder="Имя"
             value={formValue.name}
             onChange={handleChange}
           />
+
           <p className="register__name">E-mail</p>
           <input
             required
@@ -56,6 +54,7 @@ const Register = ({ handleRegister }) => {
             value={formValue.email}
             onChange={handleChange}
           />
+
           <p className="register__name">Пароль</p>
           <input
             required
@@ -63,11 +62,10 @@ const Register = ({ handleRegister }) => {
             name="password"
             type="password"
             placeholder="Пароль"
-            minLength={8}
-            maxLength={30}
             value={formValue.password}
             onChange={handleChange}
           />
+
           <div className="register__button-container">
             <button type="submit" className="register__link">
               Зарегистрироваться
@@ -83,6 +81,4 @@ const Register = ({ handleRegister }) => {
       </main>
     </>
   );
-};
-
-export default Register;
+}

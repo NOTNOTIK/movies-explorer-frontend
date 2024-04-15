@@ -216,7 +216,6 @@
     margin-top: 421px;
   }
 }
-
 .profile__container {
   display: flex;
   height: 14px;
@@ -288,6 +287,7 @@
 .profile__edit {
   all: unset;
   cursor: pointer;
+  text-align: center;
   font-family: "Inter";
   font-size: 13px;
   margin-top: 220px;
@@ -300,6 +300,11 @@
   font-family: "Inter";
   font-size: 13px;
 }
+.profile__submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 @media (max-width: 1268px) {
   .profile {
     margin-top: 204px;
@@ -309,16 +314,6 @@
   }
   .profile__edit {
     margin-top: 210px;
-  }
-  .profile__out {
-  }
-  .profile__img {
-  }
-  .profile__welcome {
-  }
-  .profile__container {
-  }
-  .profile__name {
   }
 }
 

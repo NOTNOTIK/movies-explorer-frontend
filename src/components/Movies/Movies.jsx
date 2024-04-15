@@ -1,20 +1,147 @@
-import "./Movies.css";
+import React from "react";
+import { useState, useEffect } from "react";
+import movieApi from "../../utils/MoviesApi";
+import { apiMain } from "../../utils/MainApi";
 import logo from "../../images/logo.svg";
 import account from "../../images/account.png";
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import "./Movies.css";
+import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import FilterCheckbox from "./blocks/FilterCheckbox/FilterCheckbox";
-export default function Movies({
-  onCardLike,
-  movies,
-  savedMovies,
-  onCardDelete,
-}) {
+import searchFilter from "../../utils/Filter";
+
+import { Link, NavLink } from "react-router-dom";
+
+export default function Movies() {
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [isToggled, setIsToggled] = useState(false);
 
   const toggleClass = () => {
     setIsToggled(!isToggled);
+  };
+  useEffect(() => {
+    getAllMovies();
+  }, []);
+
+  const getAllMovies = () => {
+    const movies = JSON.parse(localStorage.getItem("movies") || "[]");
+    const savedMovies = JSON.parse(localStorage.getItem("savedMovies") || "[]");
+    if (movies.length === 0 || savedMovies.length === 0) {
+      Promise.all([movieApi.getMovies(), apiMain.getUserMovies()])
+        .then(([movies, savedMovies]) => {
+          movies.forEach((movie) => {
+            if (savedMovies) {
+              const isSelected = savedMovies.filter(
+                (item) => item.movieId === movie.id
+              );
+              movie.isLiked = isSelected.length > 0;
+              if (isSelected.length > 0) {
+                movie._id = isSelected[0]._id;
+              }
+            } else {
+              movie.isLiked = false;
+            }
+          });
+          localStorage.setItem("movies", JSON.stringify(movies));
+          localStorage.setItem(
+            "savedMovies",
+            JSON.stringify(movies.filter((movie) => movie.isLiked))
+          );
+          setSavedMovies(
+            JSON.parse(localStorage.getItem("savedMovies") || "[]")
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      setSavedMovies(JSON.parse(localStorage.getItem("savedMovies") || "[]"));
+    }
+  };
+
+  const filterMovies = (query, shorts, path) => {
+    if (path === "/movies") {
+      const movies = JSON.parse(localStorage.getItem("movies"));
+      const filtered = searchFilter(movies, query, shorts);
+      setMovies(filtered);
+    } else {
+      const savedMovies = JSON.parse(localStorage.getItem("savedMovies"));
+      const filteredSaved = searchFilter(savedMovies, query, shorts);
+
+      setSavedMovies(filteredSaved);
+    }
+  };
+
+  const handleLikeMovie = (movie, path) => {
+    const prepareMovie = {
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration.toString(),
+      year: movie.year,
+      description: movie.description,
+      image: `https://api.nomoreparties.co/${movie.image.url}`,
+      trailerLink: movie.trailerLink,
+      thumbnail: `https://api.nomoreparties.co/${movie.image.url}`,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    };
+
+    if (movie.isLiked || path === "/saved-movies") {
+      apiMain
+        .deleteMovie(movie._id)
+        .then(() => {
+          changeLocalStorageData(movie, undefined);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      apiMain
+        .saveMovie(prepareMovie)
+        .then((movieResp) => {
+          changeLocalStorageData(movie, movieResp._id);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  function changeLocalStorageData(movie, createdId) {
+    const filtredMovies = movies.map((filtredMovie) => {
+      if (filtredMovie.id === movie.id) {
+        filtredMovie.isLiked = !filtredMovie.isLiked;
+        if (createdId) {
+          filtredMovie._id = createdId;
+        }
+      }
+      return filtredMovie;
+    });
+
+    const allMovies = JSON.parse(localStorage.getItem("movies"));
+    const localMovies = allMovies.map((localMovie) => {
+      if (localMovie.id === movie.id) {
+        localMovie.isLiked = !localMovie.isLiked;
+        if (createdId) {
+          localMovie._id = createdId;
+        }
+      }
+      return localMovie;
+    });
+
+    localStorage.setItem("movies", JSON.stringify(localMovies));
+    localStorage.setItem(
+      "savedMovies",
+      JSON.stringify(localMovies.filter((movieitem) => movieitem.isLiked))
+    );
+    setMovies(filtredMovies);
+    setSavedMovies(localMovies.filter((movieitem) => movieitem.isLiked));
+  }
+
+  // обработчик кнопки Найти фильм
+  const handleSearch = (query, shorts, path) => {
+    filterMovies(query, shorts, path);
   };
 
   return (
@@ -100,23 +227,16 @@ export default function Movies({
           </nav>
         </div>
       </header>
-      <main className="main-movies">
-        <form className="SearchForm">
-          <input
-            className="SearchForm__input"
-            type="text"
-            placeholder="Фильм"
-          />
-          <button className="SearchForm__button" type="button">
-            Найти
-          </button>
-        </form>
-        <FilterCheckbox />
+      <main className="movies">
+        <SearchForm
+          handleSearch={handleSearch}
+          setSavedMovies={setSavedMovies}
+        />
+
         <MoviesCardList
-          onCardLike={onCardLike}
           movies={movies}
-          savedMovies={savedMovies}
-          onCardDelete={onCardDelete}
+          savedMoviesList={savedMovies}
+          handleLikeMovie={handleLikeMovie}
         />
       </main>
       <footer className="footer">

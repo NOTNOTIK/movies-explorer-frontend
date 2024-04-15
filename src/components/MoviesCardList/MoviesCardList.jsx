@@ -1,17 +1,18 @@
-import MoviesCard from "../MoviesCard/MoviesCard";
-import "./MoviesCardList.css";
-import { useState, useEffect } from "react";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import "./MoviesCardList.css";
+import MovieCard from "../MovieCard/MovieCard";
 
 export default function MoviesCardList({
-  onCardLike,
+  handleLikeMovie,
   movies,
-  savedMovies,
-  onCardDelete,
+  savedMoviesList,
 }) {
-  const location = useLocation();
-  const [cards, setCards] = useState(16);
+  const { pathname } = useLocation();
 
+  const [cards, setCards] = useState(16);
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
@@ -43,21 +44,46 @@ export default function MoviesCardList({
   };
 
   return (
-    <section className="cards">
-      <ul className="cards__list">
-        {movies?.map((movie) => (
-          <MoviesCard key={movie.id} movie={movie} onCardLike={onCardLike} />
-        ))}
-      </ul>
-      {cards < movies?.length && (
-        <button
-          className="cards__button"
-          type="button"
-          onClick={handleLoadMore}
-        >
-          Еще
-        </button>
-      )}
-    </section>
+    <>
+      <section className="cards">
+        {pathname === "/savedMovies" ? (
+          <ul className="cards__list">
+            {savedMoviesList.map(
+              (movie) => (
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  handleLikeMovie={handleLikeMovie}
+                />
+              ),
+              12
+            )}
+          </ul>
+        ) : (
+          <div className="container">
+            <ul className="cards__list">
+              {movies.slice(0, cards).map((movie) => (
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  handleLikeMovie={handleLikeMovie}
+                />
+              ))}
+            </ul>
+            {cards < movies.length ? (
+              <button
+                className="cards__button"
+                type="button"
+                onClick={handleLoadMore}
+              >
+                Ещё
+              </button>
+            ) : (
+              ""
+            )}
+          </div>
+        )}
+      </section>
+    </>
   );
 }

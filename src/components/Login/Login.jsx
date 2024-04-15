@@ -1,10 +1,11 @@
 import React from "react";
-import "./Login.css";
-
 import { useState } from "react";
+
 import { NavLink, Link } from "react-router-dom";
+
 import logo from "../../images/logo.svg";
-const Login = ({ handleLogin }) => {
+import "./Login.css";
+export default function Login({ onLogin, errorText }) {
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
@@ -22,7 +23,7 @@ const Login = ({ handleLogin }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    handleLogin(formValue.email, formValue.password);
+    onLogin(formValue.email, formValue.password);
   };
 
   return (
@@ -70,6 +71,4 @@ const Login = ({ handleLogin }) => {
       </main>
     </>
   );
-};
-
-export default Login;
+}

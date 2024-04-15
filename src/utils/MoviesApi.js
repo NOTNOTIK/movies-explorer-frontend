@@ -19,9 +19,10 @@ class MoviesApi {
   }
 }
 
-export const movieApi = new MoviesApi({
+const movieApi = new MoviesApi({
   url: "https://api.nomoreparties.co/beatfilm-movies",
   headers: {
     "Content-Type": "application/json",
   },
 });
+export default movieApi;

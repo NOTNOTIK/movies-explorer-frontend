@@ -1,13 +1,12 @@
 import React from "react";
-import logo from "../../images/logo.svg";
-
 import "./Main.css";
-import AboutMe from "./blocks/AboutMe/AboutMe";
-import NavTab from "./blocks/NavTab/NavTab";
-import Promo from "./blocks/promo/promo";
-import Portfolio from "./blocks/Portfolio/Portfolio";
+import Promo from "./blocks/Promo/Promo";
 import Techs from "./blocks/Techs/Techs";
+import AboutMe from "./blocks/AboutMe/AboutMe";
+import Portfolio from "./blocks/Portfolio/Portfolio";
+import NavTab from "./blocks/NavTab/NavTab";
 
+import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 export default function Main() {
   return (

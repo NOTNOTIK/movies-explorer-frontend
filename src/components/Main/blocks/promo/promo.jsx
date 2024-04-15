@@ -1,4 +1,5 @@
-import "./promo.css";
+import React from "react";
+import "./Promo.css";
 import promo from "../../../../images/promo.svg";
 
 export default function Promo() {

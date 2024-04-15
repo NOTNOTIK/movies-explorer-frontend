@@ -1,9 +1,8 @@
 class MainApi {
   constructor({ url, headers }) {
-    this._url = url;
-    this._headers = headers;
+    this.url = url;
+    this.headers = headers;
   }
-
   _checkRes(res) {
     if (res.ok) {
       return res.json();
@@ -12,61 +11,94 @@ class MainApi {
     throw new Error("ошибка!");
   }
 
-  registration(data) {
-    return fetch(`${this._url}/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify(data),
-    }).then(this._checkRes);
+  _checkResponse(res) {
+    return res.ok ? res.json() : Promise.reject(res.status);
   }
 
-  authorize(email, password, jwt) {
-    return fetch(`${this._url}/signin`, {
+  async _request(url, options) {
+    const res = await fetch(url, options);
+    return this._checkResponse(res);
+  }
+
+  checkToken(token) {
+    return this._request(`${this.url}/users/me`, {
+      headers: { ...this.headers, Authorization: `Bearer ${token}` },
+    });
+  }
+
+  registration({ name, email, password }) {
+    return this._request(`${this.url}/signup`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
+      headers: this.headers,
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        name: name,
+      }),
+    });
+  }
+
+  authorize(email, password) {
+    return fetch(`${this.url}/signin`, {
+      method: "POST",
+      headers: this.headers,
       body: JSON.stringify({ email, password }),
     }).then(this._checkRes);
   }
 
-  checkToken(jwt) {
-    return fetch(`${this._url}/users/me`, {
+  getUserMovies() {
+    return fetch(`${this.url}/movies`, {
       method: "GET",
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        "Content-type": "application/json",
       },
     }).then(this._checkRes);
   }
-  getSavedMovies(jwt) {
-    return fetch(`${this._url}/movies`, {
-      method: "GET",
+
+  editUserInfo(data) {
+    return fetch(`${this.url}/users/me`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        "Content-type": "application/json",
       },
     }).then(this._checkRes);
   }
-  createMovie(movieInfo, jwt) {
-    return fetch(`${this._url}/movies`, {
+  getUserInfo() {
+    return fetch(`${this.url}/users/me`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        "Content-type": "application/json",
+      },
+    }).then(this._checkRes);
+  }
+
+  saveMovie(movie) {
+    return fetch(`${this.url}/movies`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        "Content-type": "application/json",
+      },
       method: "POST",
+      body: JSON.stringify(movie),
+    }).then(this._checkRes);
+  }
+
+  deleteMovie(movieId) {
+    return fetch(`${this.url}/movies/${movieId}`, {
+      method: "DELETE",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        "Content-type": "application/json",
       },
-      body: JSON.stringify({
-        movieInfo,
-      }),
     }).then(this._checkRes);
   }
 }
-
 export const apiMain = new MainApi({
   url: "http://localhost:3000",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
