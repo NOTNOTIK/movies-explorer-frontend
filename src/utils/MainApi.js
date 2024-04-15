@@ -97,7 +97,7 @@ class MainApi {
   }
 }
 export const apiMain = new MainApi({
-  url: "http://localhost:3000",
+  url: "http://api.ikorka01.nomoredomainswork.ru",
   headers: {
     "Content-Type": "application/json",
   },
