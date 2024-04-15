@@ -37,10 +37,6 @@ Movies Explorer - это интерактивная SPA-страница, на �
 
 ## Установка и запуск проекта:
 
-Клонировать репозиторий:
-
-    git clone https://github.com/ia-stepanov/movies-explorer-frontend.git
-
 Установить зависимости:
 
     npm install
@@ -62,6 +58,9 @@ Movies Explorer - это интерактивная SPA-страница, на �
 - ReactJS
 
 ## Чеклист Дипломной работы:
+
+- [Pull request](https://github.com/NOTNOTIK/movies-explorer-frontend/pull/2)
+- [Ссылка на Бекенд]()
 
 - [Критерии диплома веб-разработчика](https://code.s3.yandex.net/web-developer/static/new-program/web-diploma-criteria-2.0/index.html#js)
 
