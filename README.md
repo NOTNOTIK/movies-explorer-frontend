@@ -60,7 +60,8 @@ Movies Explorer - это интерактивная SPA-страница, на �
 ## Чеклист Дипломной работы:
 
 - [Pull request](https://github.com/NOTNOTIK/movies-explorer-frontend/pull/2)
-- [Ссылка на Бекенд]()
+- [Ссылка на Бекенд](https://api.ikorka01.nomoredomainswork.ru)
+- [Ссылка на Фронтенд](https://ikorka01.nomoredomainswork.ru)
 
 - [Критерии диплома веб-разработчика](https://code.s3.yandex.net/web-developer/static/new-program/web-diploma-criteria-2.0/index.html#js)
 
