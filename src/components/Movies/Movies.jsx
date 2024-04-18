@@ -8,17 +8,26 @@ import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import searchFilter from "../../utils/Filter";
-
+import Preloader from "../Preloader/Preloader";
 import { Link, NavLink } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
+import error from "../../images/Error.svg";
+import InfoTooltip from "../InfoToolTip/InfoToolTip.js";
 export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isToggled, setIsToggled] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [infoTooltipImage, setInfoTooltipImage] = useState("");
+  const [infoTooltipText, setInfoTooltipText] = useState("");
+  const location = useLocation();
   const toggleClass = () => {
     setIsToggled(!isToggled);
   };
+  function closeAllPopup() {
+    setIsInfoTooltipOpen(false);
+  }
   useEffect(() => {
     getAllMovies();
   }, []);
@@ -27,6 +36,7 @@ export default function Movies() {
     const movies = JSON.parse(localStorage.getItem("movies") || "[]");
     const savedMovies = JSON.parse(localStorage.getItem("savedMovies") || "[]");
     if (movies.length === 0 || savedMovies.length === 0) {
+      setIsLoading(true);
       Promise.all([movieApi.getMovies(), apiMain.getUserMovies()])
         .then(([movies, savedMovies]) => {
           movies.forEach((movie) => {
@@ -50,8 +60,12 @@ export default function Movies() {
           setSavedMovies(
             JSON.parse(localStorage.getItem("savedMovies") || "[]")
           );
+          setIsLoading(false);
         })
         .catch((err) => {
+          setIsInfoTooltipOpen(true);
+          setInfoTooltipText("Ничего не найдено");
+          setInfoTooltipImage(error);
           console.log(err);
         });
     } else {
@@ -60,19 +74,30 @@ export default function Movies() {
   };
 
   const filterMovies = (query, shorts, path) => {
+    setIsLoading(true);
     if (path === "/movies") {
       const movies = JSON.parse(localStorage.getItem("movies"));
       const filtered = searchFilter(movies, query, shorts);
+      if (filtered.length === 0) {
+        setIsInfoTooltipOpen(true);
+        setInfoTooltipText("Ничего не найдено");
+        setInfoTooltipImage(error);
+      }
       setMovies(filtered);
     } else {
       const savedMovies = JSON.parse(localStorage.getItem("savedMovies"));
       const filteredSaved = searchFilter(savedMovies, query, shorts);
-
+      if (filteredSaved.length === 0) {
+        setIsInfoTooltipOpen(true);
+        setInfoTooltipText("Ничего не найдено");
+        setInfoTooltipImage(error);
+      }
       setSavedMovies(filteredSaved);
     }
+    setIsLoading(false);
   };
 
-  const handleLikeMovie = (movie, path) => {
+  const handleLikeMovie = (movie) => {
     const prepareMovie = {
       country: movie.country,
       director: movie.director,
@@ -87,7 +112,7 @@ export default function Movies() {
       nameEN: movie.nameEN,
     };
 
-    if (movie.isLiked || path === "/saved-movies") {
+    if (movie.isLiked || location.pathname === "/savedMovies") {
       apiMain
         .deleteMovie(movie._id)
         .then(() => {
@@ -141,102 +166,32 @@ export default function Movies() {
 
   // обработчик кнопки Найти фильм
   const handleSearch = (query, shorts, path) => {
+    setIsLoading(true);
     filterMovies(query, shorts, path);
+    setIsLoading(false);
   };
 
   return (
     <>
-      <header className="header-movies">
-        <Link to="/">
-          <img className="header-movies__logo" src={logo} alt={logo} />
-        </Link>
-
-        <div
-          className={
-            isToggled ? "header-movies__burger active" : "header-movies__burger"
-          }
-          onClick={toggleClass}
-        >
-          <span></span>
-        </div>
-        <div
-          className={
-            isToggled
-              ? "header-movies__overlay active"
-              : "header-movies__overlay"
-          }
-          onClick={toggleClass}
-        >
-          <nav
-            className={
-              isToggled ? "header-movies__nav active" : "header-movies__nav"
-            }
-          >
-            <ul className="header-movies__list">
-              <li>
-                <NavLink
-                  to="/"
-                  id="first"
-                  className={({ isActive }) =>
-                    `header-movies__link ${
-                      isActive ? "header-movies_active" : ""
-                    }`
-                  }
-                >
-                  Главная
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/movies"
-                  className={({ isActive }) =>
-                    `header-movies__link ${
-                      isActive ? "header-movies_active" : ""
-                    }`
-                  }
-                >
-                  Фильмы
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/savedMovies"
-                  className={({ isActive }) =>
-                    `header-movies__link ${
-                      isActive ? "header-movies_active" : ""
-                    }`
-                  }
-                >
-                  Сохранённые фильмы
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink to="/profile">
-                  <div className="header-movies__account">
-                    <p className="header-movies__account-name">Аккаунт</p>
-                    <img
-                      className="header-movies__account-image"
-                      src={account}
-                      alt="Лого"
-                    />
-                  </div>
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
       <main className="movies">
         <SearchForm
           handleSearch={handleSearch}
           setSavedMovies={setSavedMovies}
         />
-
-        <MoviesCardList
-          movies={movies}
-          savedMoviesList={savedMovies}
-          handleLikeMovie={handleLikeMovie}
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            movies={movies}
+            savedMoviesList={savedMovies}
+            handleLikeMovie={handleLikeMovie}
+          />
+        )}
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={closeAllPopup}
+          logo={infoTooltipImage}
+          name={infoTooltipText}
         />
       </main>
       <footer className="footer">

@@ -5,16 +5,21 @@ import { useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { apiMain } from "../../utils/MainApi";
 import ProtectedRoute from "../../utils/ProtectedRoute";
-
+import InfoTooltip from "../InfoToolTip/InfoToolTip.js";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
 import NotFoundPage from "../PageNotFound/PageNotFound";
-
+import complete from "../../images/Complete.svg";
+import error from "../../images/Error.svg";
+import Header from "../Header/Header";
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [infoTooltipImage, setInfoTooltipImage] = useState("");
+  const [infoTooltipText, setInfoTooltipText] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const location = useLocation();
   const path = location.pathname;
@@ -56,9 +61,15 @@ function App() {
     apiMain
       .registration(data)
       .then(() => {
+        setInfoTooltipText("Вы успешно зарегистрировались!");
+        setIsInfoTooltipOpen(true);
+        setInfoTooltipImage(complete);
         navigate("/signin", { replace: true });
       })
       .catch((err) => {
+        setIsInfoTooltipOpen(true);
+        setInfoTooltipText("Что-то пошло не так! Попробуйте ещё раз.");
+        setInfoTooltipImage(error);
         console.log(err);
       })
       .finally(() => {
@@ -78,6 +89,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setIsInfoTooltipOpen(true);
+        setInfoTooltipText("Что-то пошло не так! Попробуйте ещё раз.");
+        setInfoTooltipImage(error);
       });
   };
 
@@ -86,6 +100,9 @@ function App() {
     setCurrentUser({});
     navigate("/", { replace: true });
   };
+  function closeAllPopup() {
+    setIsInfoTooltipOpen(false);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -97,12 +114,21 @@ function App() {
           element={<Register onRegister={handleRegister} />}
         />
 
-        <Route path="/" element={<Main />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <Header loggedIn={loggedIn} />
+              <Main />
+            </>
+          }
+        />
 
         <Route
           path="/movies"
           element={
             <ProtectedRoute>
+              <Header loggedIn={loggedIn} />
               <Movies />
             </ProtectedRoute>
           }
@@ -112,6 +138,7 @@ function App() {
           path="/savedMovies"
           element={
             <ProtectedRoute>
+              <Header loggedIn={loggedIn} />
               <Movies />
             </ProtectedRoute>
           }
@@ -121,12 +148,19 @@ function App() {
           path="/profile"
           element={
             <ProtectedRoute>
+              <Header loggedIn={loggedIn} />
               <Profile setCurrentUser={setCurrentUser} onSignOut={onSignOut} />
             </ProtectedRoute>
           }
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <InfoTooltip
+        isOpen={isInfoTooltipOpen}
+        onClose={closeAllPopup}
+        logo={infoTooltipImage}
+        name={infoTooltipText}
+      />
     </CurrentUserContext.Provider>
   );
 }
