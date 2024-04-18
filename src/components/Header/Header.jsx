@@ -1,14 +1,11 @@
 import logo from "../../images/logo.svg";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+
 import "./Header.css";
 import account from "../../images/account.png";
 function Header({ loggedIn }) {
-  const [isToggled, setIsToggled] = useState(false);
   const location = useLocation();
-  const toggleClass = () => {
-    setIsToggled(!isToggled);
-  };
+
   return (
     <header
       className={`header 
