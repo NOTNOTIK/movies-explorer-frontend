@@ -38,14 +38,16 @@ class MainApi {
     });
   }
 
-  authorize(email, password) {
-    return fetch(`${this.url}/signin`, {
+  authorize({ email, password }) {
+    return this._request(`${this.url}/signin`, {
       method: "POST",
       headers: this.headers,
-      body: JSON.stringify({ email, password }),
-    }).then(this._checkRes);
+      body: JSON.stringify({
+        password: password,
+        email: email,
+      }),
+    });
   }
-
   getUserMovies() {
     return fetch(`${this.url}/movies`, {
       method: "GET",

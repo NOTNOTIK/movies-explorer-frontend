@@ -21,8 +21,9 @@ function App() {
   const [infoTooltipImage, setInfoTooltipImage] = useState("");
   const [infoTooltipText, setInfoTooltipText] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+
   const location = useLocation();
-  const path = location.pathname;
+
   const navigate = useNavigate();
 
   function handleCheckToken() {
@@ -31,6 +32,7 @@ function App() {
       apiMain
         .checkToken(jwt)
         .then((res) => {
+          getUserInfo();
           setLoggedIn(true);
           navigate("/movies", { replace: true });
         })
@@ -77,7 +79,7 @@ function App() {
       });
   };
 
-  const handleLogin = (email, password) => {
+  /* const handleLogin = (email, password) => {
     apiMain
       .authorize(email, password)
       .then((res) => {
@@ -93,8 +95,22 @@ function App() {
         setInfoTooltipText("Что-то пошло не так! Попробуйте ещё раз.");
         setInfoTooltipImage(error);
       });
+  };*/
+  const handleLogin = async (email, password) => {
+    try {
+      const res = await apiMain.authorize({ email, password });
+      if (res.token) {
+        localStorage.setItem("jwt", res.token);
+        await getUserInfo();
+        navigate("/movies", { replace: true });
+        return true;
+      }
+    } catch (err) {
+      setIsInfoTooltipOpen(true);
+      setInfoTooltipText("Что-то пошло не так! Попробуйте ещё раз.");
+      setInfoTooltipImage(error);
+    }
   };
-
   const onSignOut = () => {
     localStorage.clear();
     setCurrentUser({});
@@ -118,7 +134,7 @@ function App() {
           path="/"
           element={
             <>
-              <Header loggedIn={loggedIn} />
+              <Header />
               <Main />
             </>
           }
@@ -128,7 +144,7 @@ function App() {
           path="/movies"
           element={
             <ProtectedRoute>
-              <Header loggedIn={loggedIn} />
+              <Header />
               <Movies />
             </ProtectedRoute>
           }
@@ -138,7 +154,7 @@ function App() {
           path="/savedMovies"
           element={
             <ProtectedRoute>
-              <Header loggedIn={loggedIn} />
+              <Header />
               <Movies />
             </ProtectedRoute>
           }
@@ -148,7 +164,7 @@ function App() {
           path="/profile"
           element={
             <ProtectedRoute>
-              <Header loggedIn={loggedIn} />
+              <Header />
               <Profile setCurrentUser={setCurrentUser} onSignOut={onSignOut} />
             </ProtectedRoute>
           }

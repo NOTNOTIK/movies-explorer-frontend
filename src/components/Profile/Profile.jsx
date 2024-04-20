@@ -7,60 +7,118 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import account from "../../images/account.png";
 import logo from "../../images/logo.svg";
 import { apiMain } from "../../utils/MainApi";
-
-export default function Profile({ onSignOut }) {
+import complete from "../../images/Complete.svg";
+import error from "../../images/Error.svg";
+export default function Profile({ onSignOut, setCurrentUser }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser.name);
   const [email, setEmail] = useState(currentUser.email);
-
+  const [errorNameText, setErrorNameText] = useState("");
+  const [errorEmailText, setErrorEmailText] = useState("");
   const [editButtonEnable, setEditButtonEnable] = useState(true);
   const [inputState, setInputState] = useState(true);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [infoTooltipImage, setInfoTooltipImage] = useState("");
+  const [infoTooltipText, setInfoTooltipText] = useState("");
+  const [values, setValues] = useState({});
+  const [isValid, setIsValid] = useState(false);
 
-  const [isToggled, setIsToggled] = useState(false);
-
-  const [formValue, setFormValue] = useState({
-    name: currentUser.name,
-    email: currentUser.email,
-  });
-
-  const toggleClass = () => {
-    setIsToggled(!isToggled);
-  };
+  useEffect(() => {
+    setButtonDisabled(currentUser.name === name && currentUser.email === email);
+  }, [name, email, currentUser.name, currentUser.email]);
 
   useEffect(() => {
     setName(currentUser.name);
     setEmail(currentUser.email);
   }, [currentUser.name, currentUser.email]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
-
   function handleEditClick(e) {
     setEditButtonEnable(false);
     setInputState(false);
   }
 
+  function handleChange(e) {
+    const input = e.target;
+    const name = input.name;
+    const value = input.value;
+    setValues({ ...values, [name]: value });
+
+    const isValidity = input.closest("form").checkValidity();
+    if (name === "email") {
+      const regex = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/);
+      const isValidRegex = regex.test(value);
+      if (!isValidRegex) {
+        setIsValid(false);
+      } else {
+        setIsValid(true && isValidity);
+      }
+    } else {
+      setIsValid(isValidity);
+    }
+  }
+
+  // Редактирование данных профиля
   const handleUpdateUser = async (data) => {
-    apiMain
-      .editUserInfo(data)
-      .then(() => {
+    // Блокируем инпуты и кнопку сохрнаить на время запроса
+    setButtonDisabled(true);
+    setInputState(true);
+    try {
+      const profileData = await apiMain.editUserInfo(data);
+      if (
+        profileData &&
+        (profileData.name !== currentUser.name ||
+          profileData.email !== currentUser.email)
+      ) {
+        await setCurrentUser({
+          name: profileData.name,
+          email: profileData.email,
+        });
         setEditButtonEnable(true);
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+        setInfoTooltipText("Данные успешно обновлены");
+        setIsInfoTooltipOpen(true);
+        setInfoTooltipImage(complete);
+
+        setButtonDisabled(false);
+        setInputState(false);
+        return true;
+      }
+    } catch (err) {
+      setInfoTooltipText("Ошибка");
+      setIsInfoTooltipOpen(true);
+      setInfoTooltipImage(error);
+      return false;
+    }
   };
 
   function handleSubmit(e) {
     e.preventDefault();
     handleUpdateUser({ name, email });
+  }
+
+  function handleEmailChange(e) {
+    handleChange(e);
+    setEmail(e.target.value);
+    if (e.target.value === currentUser.email) {
+      setErrorEmailText("E-mail совпадает с текущим");
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+      setErrorEmailText("");
+    }
+  }
+
+  function handleNameChange(e) {
+    handleChange(e);
+    setName(e.target.value);
+    if (e.target.value === currentUser.name) {
+      setErrorNameText("Имя пользователя не отличается от текущего");
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+      setErrorNameText("");
+    }
   }
 
   return (
@@ -79,7 +137,7 @@ export default function Profile({ onSignOut }) {
               value={name}
               minLength="2"
               maxLength="30"
-              onChange={handleChange}
+              onChange={handleNameChange}
               disabled={inputState}
             />
           </div>
@@ -94,7 +152,7 @@ export default function Profile({ onSignOut }) {
               maxLength="30"
               placeholder="E-mail"
               value={email}
-              onChange={handleChange}
+              onChange={handleEmailChange}
               disabled={inputState}
             />
           </div>
@@ -117,7 +175,11 @@ export default function Profile({ onSignOut }) {
               </Link>
             </div>
           ) : (
-            <button type="button" className="profile__edit">
+            <button
+              type="submit"
+              className="profile__edit"
+              disabled={buttonDisabled}
+            >
               Сохранить
             </button>
           )}

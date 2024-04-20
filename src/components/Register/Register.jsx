@@ -4,25 +4,50 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import "./Register.css";
 export default function Register({ onRegister }) {
-  const [formValue, setFormValue] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const [name, setName] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [values, setValues] = useState({});
+  const [isValid, setIsValid] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  function handleChange(e) {
+    const input = e.target;
+    const name = input.name;
+    const value = input.value;
+    setValues({ ...values, [name]: value });
 
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
+    const isValidity = input.closest("form").checkValidity();
+    if (name === "email") {
+      const regex = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/);
+      const isValidRegex = regex.test(value);
+      if (!isValidRegex) {
+        setIsValid(false);
+      } else {
+        setIsValid(true && isValidity);
+      }
+    } else {
+      setIsValid(isValidity);
+    }
+  }
+  function onNameChange(e) {
+    handleChange(e);
+    setName(e.target.value);
+  }
+
+  function onEmailChange(e) {
+    handleChange(e);
+    setEmail(e.target.value);
+  }
+
+  function onPasswordChange(e) {
+    handleChange(e);
+    setPassword(e.target.value);
+  }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    onRegister(formValue.name, formValue.email, formValue.password);
+    onRegister(name, email, password);
   };
 
   return (
@@ -40,8 +65,9 @@ export default function Register({ onRegister }) {
             name="name"
             type="text"
             placeholder="Имя"
-            value={formValue.name}
-            onChange={handleChange}
+            value={values.name}
+            onChange={onNameChange}
+            isValid={isValid}
           />
 
           <p className="register__name">E-mail</p>
@@ -51,8 +77,9 @@ export default function Register({ onRegister }) {
             name="email"
             type="email"
             placeholder="E-mail"
-            value={formValue.email}
-            onChange={handleChange}
+            value={values.email}
+            onChange={onEmailChange}
+            isValid={isValid}
           />
 
           <p className="register__name">Пароль</p>
@@ -62,12 +89,17 @@ export default function Register({ onRegister }) {
             name="password"
             type="password"
             placeholder="Пароль"
-            value={formValue.password}
-            onChange={handleChange}
+            value={values.password}
+            onChange={onPasswordChange}
+            isValid={isValid}
           />
 
           <div className="register__button-container">
-            <button type="submit" className="register__link">
+            <button
+              type="submit"
+              className="register__link"
+              disabled={!isValid}
+            >
               Зарегистрироваться
             </button>
           </div>

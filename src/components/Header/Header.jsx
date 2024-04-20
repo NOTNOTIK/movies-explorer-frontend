@@ -3,19 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 
 import "./Header.css";
 import account from "../../images/account.png";
-function Header({ loggedIn }) {
+function Header() {
   const location = useLocation();
-
+  const loggedIn = localStorage.getItem("isLogin");
   return (
     <header
-      className={`header 
-    ${
-      location.pathname === "/movies" ||
-      location.pathname === "/profile" ||
-      location.pathname === "/savedMovies"
-        ? "header_color_white"
-        : ""
-    }`}
+      className={`header ${
+        location.pathname === "/" ? "" : "header__container_color_white"
+      }`}
     >
       {loggedIn ? (
         <section

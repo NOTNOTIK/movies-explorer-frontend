@@ -64,6 +64,11 @@
   background-color: #3456f3;
   font-family: "Inter";
 }
+.register__link:disabled {
+  background: #f8f8f8;
+  color: #c2c2c2;
+  cursor: auto;
+}
 .register__name {
   margin: 0;
   color: #a0a0a0;
