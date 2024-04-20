@@ -75,7 +75,6 @@ export default function Profile({ onSignOut, setCurrentUser }) {
           email: profileData.email,
         });
         setEditButtonEnable(true);
-
         setInfoTooltipText("Данные успешно обновлены");
         setIsInfoTooltipOpen(true);
         setInfoTooltipImage(complete);
