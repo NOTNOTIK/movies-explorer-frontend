@@ -12,19 +12,21 @@ export default function Login({ onLogin }) {
   const navigate = useNavigate();
   const [values, setValues] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [errors, setErrors] = useState({});
 
   function handleChange(e) {
     const input = e.target;
     const name = input.name;
     const value = input.value;
     setValues({ ...values, [name]: value });
-
+    setErrors({ ...errors, [name]: input.validationMessage });
     const isValidity = input.closest("form").checkValidity();
     if (name === "email") {
       const regex = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/);
       const isValidRegex = regex.test(value);
       if (!isValidRegex) {
         setIsValid(false);
+        setErrors({ ...errors, email: "Введите корректный email" });
       } else {
         setIsValid(true && isValidity);
       }
@@ -65,7 +67,8 @@ export default function Login({ onLogin }) {
             onChange={onEmailChange}
             isValid={isValid}
           />
-          <span class="error" id="email-error"></span>
+
+          <span className="login__input-error">{errors.email}</span>
           <p className="login__name">Пароль</p>
           <input
             required
@@ -77,7 +80,7 @@ export default function Login({ onLogin }) {
             onChange={onPasswordChange}
             isValid={isValid}
           />
-          <span class="error" id="password-error"></span>
+          <span className="login__input-error">{errors.password}</span>
           <div className="login__button-container">
             <button type="submit" className="login__link" disabled={!isValid}>
               Войти

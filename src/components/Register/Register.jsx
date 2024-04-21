@@ -9,19 +9,21 @@ export default function Register({ onRegister }) {
   const [password, setPassword] = useState("");
   const [values, setValues] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [errors, setErrors] = useState({});
 
   function handleChange(e) {
     const input = e.target;
     const name = input.name;
     const value = input.value;
     setValues({ ...values, [name]: value });
-
+    setErrors({ ...errors, [name]: input.validationMessage });
     const isValidity = input.closest("form").checkValidity();
     if (name === "email") {
       const regex = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/);
       const isValidRegex = regex.test(value);
       if (!isValidRegex) {
         setIsValid(false);
+        setErrors({ ...errors, email: "Введите корректный email" });
       } else {
         setIsValid(true && isValidity);
       }
@@ -69,7 +71,7 @@ export default function Register({ onRegister }) {
             onChange={onNameChange}
             isValid={isValid}
           />
-
+          <span className="register__input-error">{errors.name}</span>
           <p className="register__name">E-mail</p>
           <input
             required
@@ -81,7 +83,7 @@ export default function Register({ onRegister }) {
             onChange={onEmailChange}
             isValid={isValid}
           />
-
+          <span className="register__input-error">{errors.email}</span>
           <p className="register__name">Пароль</p>
           <input
             required
@@ -93,7 +95,7 @@ export default function Register({ onRegister }) {
             onChange={onPasswordChange}
             isValid={isValid}
           />
-
+          <span className="register__input-error">{errors.password}</span>
           <div className="register__button-container">
             <button
               type="submit"

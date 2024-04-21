@@ -65,6 +65,14 @@
   color: #c2c2c2;
   cursor: auto;
 }
+.login__input-error {
+  font-size: 11px;
+  line-height: 13px;
+  color: #ee3465;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  font-family: "Inter";
+}
 .login__name {
   margin: 0;
   color: #a0a0a0;

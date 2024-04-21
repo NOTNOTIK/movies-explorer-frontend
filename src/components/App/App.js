@@ -34,7 +34,6 @@ function App() {
         .then((res) => {
           getUserInfo();
           setLoggedIn(true);
-          navigate("/movies", { replace: true });
         })
         .catch((err) => {
           console.log(err);

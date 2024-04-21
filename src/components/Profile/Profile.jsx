@@ -23,7 +23,7 @@ export default function Profile({ onSignOut, setCurrentUser }) {
   const [infoTooltipText, setInfoTooltipText] = useState("");
   const [values, setValues] = useState({});
   const [isValid, setIsValid] = useState(false);
-
+  const [errors, setErrors] = useState({});
   useEffect(() => {
     setButtonDisabled(currentUser.name === name && currentUser.email === email);
   }, [name, email, currentUser.name, currentUser.email]);
@@ -43,14 +43,17 @@ export default function Profile({ onSignOut, setCurrentUser }) {
     const name = input.name;
     const value = input.value;
     setValues({ ...values, [name]: value });
-
+    setErrors({ ...errors, [name]: input.validationMessage });
     const isValidity = input.closest("form").checkValidity();
     if (name === "email") {
       const regex = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/);
       const isValidRegex = regex.test(value);
       if (!isValidRegex) {
         setIsValid(false);
+        setErrors({ ...errors, email: "Введите корректный email" });
       } else {
+        errors.email = "";
+        setErrors(errors);
         setIsValid(true && isValidity);
       }
     } else {
@@ -140,6 +143,7 @@ export default function Profile({ onSignOut, setCurrentUser }) {
               disabled={inputState}
             />
           </div>
+          <span className="profile__input-error">{errorNameText}</span>
           <div className="profile__container">
             <p className="profile__name">E-mail</p>
             <input
@@ -155,6 +159,8 @@ export default function Profile({ onSignOut, setCurrentUser }) {
               disabled={inputState}
             />
           </div>
+
+          <span className="profile__input-error">{errorEmailText}</span>
           {editButtonEnable ? (
             <div className="profile__submit">
               <button
@@ -176,7 +182,7 @@ export default function Profile({ onSignOut, setCurrentUser }) {
           ) : (
             <button
               type="submit"
-              className="profile__edit"
+              className="profile__edit_active"
               disabled={buttonDisabled}
             >
               Сохранить

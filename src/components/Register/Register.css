@@ -75,10 +75,18 @@
   font-family: "Inter";
   font-size: 10px;
 }
-.register__name:nth-child(3) {
+.register__input-error {
+  font-size: 11px;
+  line-height: 13px;
+  color: #ee3465;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  font-family: "Inter";
+}
+.register__name:nth-child(4) {
   margin-top: 30px;
 }
-.register__name:nth-child(5) {
+.register__name:nth-child(7) {
   margin-top: 30px;
 }
 .register__signin {
