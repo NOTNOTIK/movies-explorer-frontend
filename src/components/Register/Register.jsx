@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import "./Register.css";
 export default function Register({ onRegister }) {
@@ -67,6 +67,8 @@ export default function Register({ onRegister }) {
             name="name"
             type="text"
             placeholder="Имя"
+            minLength={2}
+            maxLength={30}
             value={values.name}
             onChange={onNameChange}
             isValid={isValid}
@@ -90,6 +92,8 @@ export default function Register({ onRegister }) {
             id="password"
             name="password"
             type="password"
+            minLength={8}
+            maxLength={50}
             placeholder="Пароль"
             value={values.password}
             onChange={onPasswordChange}

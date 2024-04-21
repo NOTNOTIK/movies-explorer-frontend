@@ -2,29 +2,23 @@ import React from "react";
 import { useState, useEffect } from "react";
 import movieApi from "../../utils/MoviesApi";
 import { apiMain } from "../../utils/MainApi";
-import logo from "../../images/logo.svg";
-import account from "../../images/account.png";
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import searchFilter from "../../utils/Filter";
 import Preloader from "../Preloader/Preloader";
-import { Link, NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import error from "../../images/Error.svg";
 import InfoTooltip from "../InfoToolTip/InfoToolTip.js";
 export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isToggled, setIsToggled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [infoTooltipImage, setInfoTooltipImage] = useState("");
   const [infoTooltipText, setInfoTooltipText] = useState("");
   const location = useLocation();
-  const toggleClass = () => {
-    setIsToggled(!isToggled);
-  };
+
   function closeAllPopup() {
     setIsInfoTooltipOpen(false);
   }

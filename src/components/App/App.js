@@ -34,6 +34,7 @@ function App() {
         .then((res) => {
           getUserInfo();
           setLoggedIn(true);
+          routeNavigate();
         })
         .catch((err) => {
           console.log(err);
@@ -44,6 +45,18 @@ function App() {
     handleCheckToken();
   }, [loggedIn]);
 
+  const routeNavigate = () => {
+    const loggedIn = localStorage.getItem("isLogin");
+    if (loggedIn) {
+      if (
+        location.pathname === "/signup" ||
+        location.pathname === "/signin" ||
+        location.pathname === "/"
+      ) {
+        navigate("/movies");
+      }
+    }
+  };
   const getUserInfo = async () => {
     try {
       const userData = await apiMain.getUserInfo();
@@ -77,24 +90,6 @@ function App() {
         console.log(data);
       });
   };
-
-  /* const handleLogin = (email, password) => {
-    apiMain
-      .authorize(email, password)
-      .then((res) => {
-        if (res && res.token) {
-          localStorage.setItem("jwt", res.token);
-          getUserInfo();
-          navigate("/movies", { replace: true });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsInfoTooltipOpen(true);
-        setInfoTooltipText("Что-то пошло не так! Попробуйте ещё раз.");
-        setInfoTooltipImage(error);
-      });
-  };*/
   const handleLogin = async (email, password) => {
     try {
       const res = await apiMain.authorize({ email, password });

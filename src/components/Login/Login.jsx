@@ -1,15 +1,15 @@
 import React from "react";
 import { useState } from "react";
 
-import { NavLink, Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import logo from "../../images/logo.svg";
 import "./Login.css";
 
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+
   const [values, setValues] = useState({});
   const [isValid, setIsValid] = useState(false);
   const [errors, setErrors] = useState({});

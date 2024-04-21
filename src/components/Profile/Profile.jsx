@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import "./Profile.css";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import account from "../../images/account.png";
-import logo from "../../images/logo.svg";
+import InfoTooltip from "../InfoToolTip/InfoToolTip.js";
 import { apiMain } from "../../utils/MainApi";
 import complete from "../../images/Complete.svg";
 import error from "../../images/Error.svg";
@@ -22,7 +21,6 @@ export default function Profile({ onSignOut, setCurrentUser }) {
   const [infoTooltipImage, setInfoTooltipImage] = useState("");
   const [infoTooltipText, setInfoTooltipText] = useState("");
   const [values, setValues] = useState({});
-  const [isValid, setIsValid] = useState(false);
   const [errors, setErrors] = useState({});
   useEffect(() => {
     setButtonDisabled(currentUser.name === name && currentUser.email === email);
@@ -44,26 +42,18 @@ export default function Profile({ onSignOut, setCurrentUser }) {
     const value = input.value;
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: input.validationMessage });
-    const isValidity = input.closest("form").checkValidity();
     if (name === "email") {
       const regex = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/);
       const isValidRegex = regex.test(value);
       if (!isValidRegex) {
-        setIsValid(false);
         setErrors({ ...errors, email: "Введите корректный email" });
       } else {
-        errors.email = "";
         setErrors(errors);
-        setIsValid(true && isValidity);
       }
-    } else {
-      setIsValid(isValidity);
     }
   }
 
-  // Редактирование данных профиля
   const handleUpdateUser = async (data) => {
-    // Блокируем инпуты и кнопку сохрнаить на время запроса
     setButtonDisabled(true);
     setInputState(true);
     try {
@@ -122,7 +112,9 @@ export default function Profile({ onSignOut, setCurrentUser }) {
       setErrorNameText("");
     }
   }
-
+  function closeAllPopup() {
+    setIsInfoTooltipOpen(false);
+  }
   return (
     <>
       <main className="profile">
@@ -189,6 +181,12 @@ export default function Profile({ onSignOut, setCurrentUser }) {
             </button>
           )}
         </form>
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={closeAllPopup}
+          logo={infoTooltipImage}
+          name={infoTooltipText}
+        />
       </main>
     </>
   );

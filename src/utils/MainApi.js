@@ -11,13 +11,9 @@ class MainApi {
     throw new Error("ошибка!");
   }
 
-  _checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject(res.status);
-  }
-
   async _request(url, options) {
     const res = await fetch(url, options);
-    return this._checkResponse(res);
+    return this._checkRes(res);
   }
 
   checkToken(token) {

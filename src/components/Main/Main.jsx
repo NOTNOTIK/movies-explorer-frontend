@@ -6,9 +6,6 @@ import AboutMe from "./blocks/AboutMe/AboutMe";
 import Portfolio from "./blocks/Portfolio/Portfolio";
 import NavTab from "./blocks/NavTab/NavTab";
 
-import logo from "../../images/logo.svg";
-import { Link } from "react-router-dom";
-
 export default function Main() {
   return (
     <>
