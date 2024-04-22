@@ -78,7 +78,7 @@ function App() {
         setInfoTooltipText("Вы успешно зарегистрировались!");
         setIsInfoTooltipOpen(true);
         setInfoTooltipImage(complete);
-        navigate("/signin", { replace: true });
+        handleLogin(email, password);
       })
       .catch((err) => {
         setIsInfoTooltipOpen(true);
