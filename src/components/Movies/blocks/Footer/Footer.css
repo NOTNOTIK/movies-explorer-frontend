@@ -1,0 +1,71 @@
+.footer {
+  margin-top: 160px;
+}
+.footer__title {
+  margin: 0;
+  font-family: "Inter";
+  margin-left: 70px;
+  margin-right: 70px;
+  padding-bottom: 20px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #a0a0a0;
+  text-align: center;
+  border-bottom: 1px solid #a0a0a0;
+}
+.footer__container {
+  display: flex;
+  margin-left: 70px;
+  margin-right: 70px;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__year {
+  font-family: "Inter";
+  margin: 0;
+  font-size: 13.9px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #a0a0a0;
+}
+.footer__nav {
+  display: flex;
+  gap: 20px;
+}
+.footer__link {
+  font-family: "Inter";
+  color: black;
+  font-size: 13px;
+  text-decoration: none;
+}
+@media (max-width: 1268px) {
+  .footer__title {
+    margin: 0 30px;
+  }
+  .footer__container {
+    margin: 0 30px;
+  }
+}
+@media (max-width: 767px) {
+  .footer__title {
+    margin: 0 10px;
+    font-size: 12px;
+  }
+  .footer__container {
+    margin: 0 auto;
+    margin-top: 30px;
+    gap: 12px;
+    flex-direction: column-reverse;
+  }
+  .footer__nav {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+  .footer__link {
+    font-size: 12px;
+  }
+  .footer__year {
+    font-size: 11px;
+  }
+}

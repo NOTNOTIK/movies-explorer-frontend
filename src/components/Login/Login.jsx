@@ -1,28 +1,51 @@
 import React from "react";
+import { useState } from "react";
+
+import { Link } from "react-router-dom";
+
+import logo from "../../images/logo.svg";
 import "./Login.css";
 
-import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
-import logo from "../../images/logo.svg";
-const Login = () => {
-  const [formValue, setFormValue] = useState({
-    email: "",
-    password: "",
-  });
+export default function Login({ onLogin }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
+  const [values, setValues] = useState({});
+  const [isValid, setIsValid] = useState(false);
+  const [errors, setErrors] = useState({});
 
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
+  function handleChange(e) {
+    const input = e.target;
+    const name = input.name;
+    const value = input.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: input.validationMessage });
+    const isValidity = input.closest("form").checkValidity();
+    if (name === "email") {
+      const regex = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/);
+      const isValidRegex = regex.test(value);
+      if (!isValidRegex) {
+        setIsValid(false);
+        setErrors({ ...errors, email: "Введите корректный email" });
+      } else {
+        setIsValid(true && isValidity);
+      }
+    } else {
+      setIsValid(isValidity);
+    }
+  }
+  function onEmailChange(e) {
+    handleChange(e);
+    setEmail(e.target.value);
+  }
 
+  function onPasswordChange(e) {
+    handleChange(e);
+    setPassword(e.target.value);
+  }
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
-    //handleLogin(formValue.email, formValue.password);
+    onLogin(email, password);
   };
 
   return (
@@ -40,10 +63,12 @@ const Login = () => {
             name="email"
             type="email"
             placeholder="E-mail"
-            value={formValue.email}
-            onChange={handleChange}
+            value={values.email}
+            onChange={onEmailChange}
+            isValid={isValid}
           />
-          <span class="error" id="email-error"></span>
+
+          <span className="login__input-error">{errors.email}</span>
           <p className="login__name">Пароль</p>
           <input
             required
@@ -51,12 +76,13 @@ const Login = () => {
             name="password"
             type="password"
             placeholder="Пароль"
-            value={formValue.password}
-            onChange={handleChange}
+            value={values.password}
+            onChange={onPasswordChange}
+            isValid={isValid}
           />
-          <span class="error" id="password-error"></span>
+          <span className="login__input-error">{errors.password}</span>
           <div className="login__button-container">
-            <button type="submit" className="login__link">
+            <button type="submit" className="login__link" disabled={!isValid}>
               Войти
             </button>
           </div>
@@ -70,6 +96,4 @@ const Login = () => {
       </main>
     </>
   );
-};
-
-export default Login;
+}

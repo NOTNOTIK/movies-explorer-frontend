@@ -1,29 +1,55 @@
 import React from "react";
-import "./Register.css";
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
-const Register = () => {
-  const [formValue, setFormValue] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+import "./Register.css";
+export default function Register({ onRegister }) {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [values, setValues] = useState({});
+  const [isValid, setIsValid] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  function handleChange(e) {
+    const input = e.target;
+    const name = input.name;
+    const value = input.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: input.validationMessage });
+    const isValidity = input.closest("form").checkValidity();
+    if (name === "email") {
+      const regex = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/);
+      const isValidRegex = regex.test(value);
+      if (!isValidRegex) {
+        setIsValid(false);
+        setErrors({ ...errors, email: "Введите корректный email" });
+      } else {
+        setIsValid(true && isValidity);
+      }
+    } else {
+      setIsValid(isValidity);
+    }
+  }
+  function onNameChange(e) {
+    handleChange(e);
+    setName(e.target.value);
+  }
 
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
+  function onEmailChange(e) {
+    handleChange(e);
+    setEmail(e.target.value);
+  }
+
+  function onPasswordChange(e) {
+    handleChange(e);
+    setPassword(e.target.value);
+  }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    //handleLogin(formValue.email, formValue.password);
+    onRegister(name, email, password);
   };
 
   return (
@@ -32,7 +58,7 @@ const Register = () => {
         <Link to="/" className="register__img">
           <img src={logo} alt="Лого" />
         </Link>
-        <h1 className="register__welcome">Добро пожаловать!</h1>
+        <h1 className="register__welcome">Рады видеть!</h1>
         <form onSubmit={handleSubmit} className="register__form">
           <p className="register__name">Имя</p>
           <input
@@ -40,12 +66,14 @@ const Register = () => {
             id="name"
             name="name"
             type="text"
+            placeholder="Имя"
             minLength={2}
             maxLength={30}
-            placeholder="Имя"
-            value={formValue.name}
-            onChange={handleChange}
+            value={values.name}
+            onChange={onNameChange}
+            isValid={isValid}
           />
+          <span className="register__input-error">{errors.name}</span>
           <p className="register__name">E-mail</p>
           <input
             required
@@ -53,23 +81,31 @@ const Register = () => {
             name="email"
             type="email"
             placeholder="E-mail"
-            value={formValue.email}
-            onChange={handleChange}
+            value={values.email}
+            onChange={onEmailChange}
+            isValid={isValid}
           />
+          <span className="register__input-error">{errors.email}</span>
           <p className="register__name">Пароль</p>
           <input
             required
             id="password"
             name="password"
             type="password"
-            placeholder="Пароль"
             minLength={8}
-            maxLength={30}
-            value={formValue.password}
-            onChange={handleChange}
+            maxLength={50}
+            placeholder="Пароль"
+            value={values.password}
+            onChange={onPasswordChange}
+            isValid={isValid}
           />
+          <span className="register__input-error">{errors.password}</span>
           <div className="register__button-container">
-            <button type="submit" className="register__link">
+            <button
+              type="submit"
+              className="register__link"
+              disabled={!isValid}
+            >
               Зарегистрироваться
             </button>
           </div>
@@ -83,6 +119,4 @@ const Register = () => {
       </main>
     </>
   );
-};
-
-export default Register;
+}
